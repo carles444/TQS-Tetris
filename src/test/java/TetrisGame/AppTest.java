@@ -1,4 +1,4 @@
-package org.example;
+package TetrisGame;
 
 import static org.junit.Assert.assertTrue;
 

@@ -1,0 +1,66 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+skinparam linetype polyline
+
+class TetrisGame {
+    + TetrisGame()
+    + logIn(UserName : String, Password : String)
+    + signUp(UserName : String, Password : String)
+    + play()
+    + logOut()
+    + showMenu()  
+}
+
+class Player{
+    - topScore : int
+    + Player(UserName : String)
+    + createGame()
+    + addGameInfo(info : String)
+    + getPlayerInfo()
+    + play()
+}
+
+class Game {
+    - score : int
+    + Game()
+    + drawBoard()
+    + playGame()
+    + stopGame()
+    + createNewActivePiece()
+    + endGame() : int
+
+}
+class Board {
+    + Board()
+    - boardMatrix : vector<vector<color>>
+    isOcupped(row : int, col : int) : boolean
+
+}
+abstract class Piece {
+    + Piece()
+    - Positions : int[4][2]
+    + colMove(nCols : int)
+    + rowMove(nRows : int)
+    + Color
+}
+
+class Interface {
+    + Interface()
+}
+
+class OrangeRicky extends Piece
+class BlueRicky extends Piece
+class ClevelandZ extends Piece
+class RhodeIslandZ extends Piece
+class Hero extends Piece
+class Teewee extends Piece
+class Smashboy extends Piece
+
+TetrisGame -left-> "0..1" Player
+TetrisGame <-down-> "0..1" Game
+Game -left-> "1" Board
+Game -down-> "2"Piece
+Game -right-> "1" Interface
+
+@enduml
