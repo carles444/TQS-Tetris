@@ -3,8 +3,8 @@
 skinparam classAttributeIconSize 0
 skinparam linetype polyline
 
-class TetrisGame {
-    + TetrisGame()
+class TetrisGameClient {
+    + TetrisGameClient()
     + logIn(UserName : String, Password : String)
     + signUp(UserName : String, Password : String)
     + play()
@@ -31,10 +31,18 @@ class Game {
     + endGame() : int
 
 }
+
+abstract class Observable
+class Controls extends Observable
+
 class Board {
+    + createPiece() : Piece
+    + deletePiece()
+    + Update(controlKey)
     + Board()
     - boardMatrix : vector<vector<color>>
-    isOcupped(row : int, col : int) : boolean
+    + isOcupped(row : int, col : int) : boolean
+
 
 }
 abstract class Piece {
@@ -43,6 +51,11 @@ abstract class Piece {
     + colMove(nCols : int)
     + rowMove(nRows : int)
     + Color
+    + rotateRight() : boolean
+    + rotateLeft() : boolean
+    + goDown()
+    + moveRight() : boolean
+    + moveLeft() : boolean
 }
 
 class Interface {
@@ -57,10 +70,11 @@ class Hero extends Piece
 class Teewee extends Piece
 class Smashboy extends Piece
 
-TetrisGame -left-> "0..1" Player
-TetrisGame <-down-> "0..1" Game
+Observable -right-> "1" Board
+TetrisGameClient -right-> "0..1" Player
+TetrisGameClient <-down-> "0..1" Game
 Game -left-> "1" Board
-Game -down-> "2"Piece
+Board -down-> "2"Piece
 Game -right-> "1" Interface
 
 @enduml
