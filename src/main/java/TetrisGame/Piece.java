@@ -20,6 +20,14 @@ public abstract class Piece {
         }
         return positions;
     }
+
+    public int[][] rotateRight() {
+
+    }
+
+    public int[][] rotateLeft() {
+
+    }
 }
 
 class OrangeRicky extends Piece {

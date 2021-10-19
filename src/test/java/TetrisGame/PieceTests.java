@@ -52,4 +52,34 @@ public class PieceTests {
         assertArrayEquals(piece.moveRow(0), expectedPos);
 
     }
+
+    @Test
+    public void testRotateRight() {
+        int[][] expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        assertArrayEquals(piece.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        assertArrayEquals(piece.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        assertArrayEquals(piece.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(piece.rotateRight(), expectedPos);
+    }
+
+    @Test
+    public void testRotateLeft() {
+        int[][] expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        assertArrayEquals(piece.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        assertArrayEquals(piece.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        assertArrayEquals(piece.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(piece.rotateLeft(), expectedPos);
+    }
 }
