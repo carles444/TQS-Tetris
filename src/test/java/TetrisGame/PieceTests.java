@@ -16,7 +16,7 @@ public class PieceTests {
         piece = new BlueRicky(new int[]{0, 0});
     }
     @Test
-    public void testColMove() {
+    public void testMoveCol() {
         int[][] expectedPos = new int[][]{{0, 1}, {1, 1}, {1, 2}, {1, 3}};
         assertArrayEquals(piece.moveCol(1), expectedPos);
 
@@ -35,7 +35,7 @@ public class PieceTests {
     }
 
     @Test
-    public void testRowMove() {
+    public void testMoveRow() {
         int[][] expectedPos = new int[][]{{1, 0}, {2, 0}, {2, 1}, {2, 2}};
         assertArrayEquals(piece.moveRow(1), expectedPos);
 
