@@ -33,4 +33,23 @@ public class PieceTests {
         assertArrayEquals(piece.moveCol(0), expectedPos);
 
     }
+
+    @Test
+    public void testRowMove() {
+        int[][] expectedPos = new int[][]{{1, 0}, {2, 0}, {2, 1}, {2, 2}};
+        assertArrayEquals(piece.moveRow(1), expectedPos);
+
+        expectedPos = new int[][]{{3, 0}, {4, 0}, {4, 1}, {4, 2}};
+        assertArrayEquals(piece.moveRow(2), expectedPos);
+
+        expectedPos = new int[][]{{2, 0}, {3, 0}, {3, 1}, {3, 2}};
+        assertArrayEquals(piece.moveRow(-1), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(piece.moveRow(-2), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(piece.moveRow(0), expectedPos);
+
+    }
 }
