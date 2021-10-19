@@ -5,81 +5,50 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class PieceTests {
-    Piece piece;
+    Piece blueRicky;
 
     @BeforeEach
     public void setUp() {
-        piece = new BlueRicky(new int[]{0, 0});
+        blueRicky = new BlueRicky(new int[]{0, 0});
     }
     @Test
     public void testMoveCol() {
         int[][] expectedPos = new int[][]{{0, 1}, {1, 1}, {1, 2}, {1, 3}};
-        assertArrayEquals(piece.moveCol(1), expectedPos);
+        assertArrayEquals(blueRicky.moveCol(1), expectedPos);
 
         expectedPos = new int[][]{{0, 3}, {1, 3}, {1, 4}, {1, 5}};
-        assertArrayEquals(piece.moveCol(2), expectedPos);
+        assertArrayEquals(blueRicky.moveCol(2), expectedPos);
 
         expectedPos = new int[][]{{0, 2}, {1, 2}, {1, 3}, {1, 4}};
-        assertArrayEquals(piece.moveCol(-1), expectedPos);
+        assertArrayEquals(blueRicky.moveCol(-1), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.moveCol(-2), expectedPos);
+        assertArrayEquals(blueRicky.moveCol(-2), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.moveCol(0), expectedPos);
+        assertArrayEquals(blueRicky.moveCol(0), expectedPos);
 
     }
 
     @Test
     public void testMoveRow() {
         int[][] expectedPos = new int[][]{{1, 0}, {2, 0}, {2, 1}, {2, 2}};
-        assertArrayEquals(piece.moveRow(1), expectedPos);
+        assertArrayEquals(blueRicky.moveRow(1), expectedPos);
 
         expectedPos = new int[][]{{3, 0}, {4, 0}, {4, 1}, {4, 2}};
-        assertArrayEquals(piece.moveRow(2), expectedPos);
+        assertArrayEquals(blueRicky.moveRow(2), expectedPos);
 
         expectedPos = new int[][]{{2, 0}, {3, 0}, {3, 1}, {3, 2}};
-        assertArrayEquals(piece.moveRow(-1), expectedPos);
+        assertArrayEquals(blueRicky.moveRow(-1), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.moveRow(-2), expectedPos);
+        assertArrayEquals(blueRicky.moveRow(-2), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.moveRow(0), expectedPos);
+        assertArrayEquals(blueRicky.moveRow(0), expectedPos);
 
     }
 
-    @Test
-    public void testRotateRight() {
-        int[][] expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
-        assertArrayEquals(piece.rotateRight(), expectedPos);
 
-        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
-        assertArrayEquals(piece.rotateRight(), expectedPos);
-
-        expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
-        assertArrayEquals(piece.rotateRight(), expectedPos);
-
-        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.rotateRight(), expectedPos);
-    }
-
-    @Test
-    public void testRotateLeft() {
-        int[][] expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
-        assertArrayEquals(piece.rotateLeft(), expectedPos);
-
-        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
-        assertArrayEquals(piece.rotateLeft(), expectedPos);
-
-        expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
-        assertArrayEquals(piece.rotateLeft(), expectedPos);
-
-        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
-        assertArrayEquals(piece.rotateLeft(), expectedPos);
-    }
 }

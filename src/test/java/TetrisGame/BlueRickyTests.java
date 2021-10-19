@@ -1,0 +1,44 @@
+package TetrisGame;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+public class BlueRickyTests {
+    Piece blueRicky;
+    @BeforeEach
+    public void setUp() {
+        blueRicky = new BlueRicky(new int[]{0, 0});
+    }
+
+    @Test
+    public void testRotateRightBlueRicky() {
+        int[][] expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        assertArrayEquals(blueRicky.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        assertArrayEquals(blueRicky.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        assertArrayEquals(blueRicky.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(blueRicky.rotateRight(), expectedPos);
+    }
+
+    @Test
+    public void testRotateLeftBlueRicky() {
+        int[][] expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
+    }
+}
