@@ -1,8 +1,17 @@
 package TetrisGame;
 
 public abstract class Piece {
-    public int[][] moveCol(int nCols){
+    protected int[][] positions;
+    protected static int pieceDim = 4;
 
+    Piece() {
+        positions = new int[pieceDim][2];
+    }
+    public int[][] moveCol(int nCols){
+        for(int i = 0; i < pieceDim; i++){
+            positions[i][1]+=nCols;
+        }
+        return positions;
     }
 }
 
@@ -12,7 +21,11 @@ class OrangeRicky extends Piece {
 
 class BlueRicky extends Piece {
     BlueRicky(int[] initPos) {
-
+        super();
+        positions[0] = initPos;
+        positions[1] = new int[]{initPos[0]+1, initPos[1]};
+        positions[2] = new int[]{initPos[0]+1, initPos[1]+1};
+        positions[3] = new int[]{initPos[0]+1, initPos[1]+2};
     }
 }
 
