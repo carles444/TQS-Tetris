@@ -13,6 +13,13 @@ public abstract class Piece {
         }
         return positions;
     }
+
+    public int[][] moveRow(int nRows){
+        for(int i = 0; i < pieceDim; i++){
+            positions[i][0]+=nRows;
+        }
+        return positions;
+    }
 }
 
 class OrangeRicky extends Piece {
