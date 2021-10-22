@@ -1,7 +1,7 @@
 package TetrisGame;
 
-//    #
-//# # #
+//    0
+//3 2 1
 class OrangeRicky extends Piece {
     OrangeRicky(int[] initPos) {
         super();

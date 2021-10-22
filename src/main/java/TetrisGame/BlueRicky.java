@@ -1,5 +1,7 @@
 package TetrisGame;
 
+//0
+//1 2 3
 class BlueRicky extends Piece {
     BlueRicky(int[] initPos) {
         super();
