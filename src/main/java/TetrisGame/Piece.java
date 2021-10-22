@@ -1,7 +1,7 @@
 package TetrisGame;
 
 public abstract class Piece {
-    protected int[][] positions;
+    protected int[][] positions; //first position is the lowest row one
     protected static int pieceDim = 4;
 
     Piece() {

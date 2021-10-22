@@ -15,6 +15,12 @@ public class BlueRickyTests {
     }
 
     @Test
+    public void testGetPositions() {
+        int[][] expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        assertArrayEquals(blueRicky.getPositions(), expectedPos);
+    }
+
+    @Test
     public void testRotateRightBlueRicky() {
         int[][] expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
         assertArrayEquals(blueRicky.rotateRight(), expectedPos);
