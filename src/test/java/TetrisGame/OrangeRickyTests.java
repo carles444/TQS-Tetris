@@ -12,7 +12,7 @@ public class OrangeRickyTests {
     Piece orangeRicky;
     @BeforeEach
     public void setUp() {
-        orangeRicky = new BlueRicky(new int[]{0, 0});
+        orangeRicky = new OrangeRicky(new int[]{0, 0});
     }
 
     @Test
