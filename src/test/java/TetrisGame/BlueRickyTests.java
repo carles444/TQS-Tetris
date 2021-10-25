@@ -22,13 +22,13 @@ public class BlueRickyTests {
 
     @Test
     public void testRotateRightBlueRicky() {
-        int[][] expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        int[][] expectedPos = new int[][]{{-1, 2}, {-1, 1}, {0, 1}, {1, 1}};
         assertArrayEquals(blueRicky.rotateRight(), expectedPos);
 
-        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        expectedPos = new int[][]{{1, 2}, {0, 2}, {0, 1}, {0, 0}};
         assertArrayEquals(blueRicky.rotateRight(), expectedPos);
 
-        expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        expectedPos = new int[][]{{1, 0}, {1, 1}, {0, 1}, {-1, 1}};
         assertArrayEquals(blueRicky.rotateRight(), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
@@ -37,13 +37,13 @@ public class BlueRickyTests {
 
     @Test
     public void testRotateLeftBlueRicky() {
-        int[][] expectedPos = new int[][]{{2, 0}, {2, 1}, {1, 1}, {0, 1}};
+        int[][] expectedPos = new int[][]{{1, 1}, {1, 2}, {0, 2}, {-1, 2}};
         assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
 
-        expectedPos = new int[][]{{2, 2}, {1, 2}, {1, 1}, {1, 0}};
+        expectedPos = new int[][]{{1, 2}, {0, 2}, {0, 1}, {0, 0}};
         assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
 
-        expectedPos = new int[][]{{0, 2}, {0, 1}, {1, 1}, {2, 1}};
+        expectedPos = new int[][]{{-1, 2}, {-1, 1}, {0, 1}, {1, 1}};
         assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
