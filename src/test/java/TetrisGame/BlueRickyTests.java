@@ -37,7 +37,7 @@ public class BlueRickyTests {
 
     @Test
     public void testRotateLeftBlueRicky() {
-        int[][] expectedPos = new int[][]{{1, 1}, {1, 2}, {0, 2}, {-1, 2}};
+        int[][] expectedPos = new int[][]{{1, 0}, {1, 1}, {0, 1}, {-1, 1}};
         assertArrayEquals(blueRicky.rotateLeft(), expectedPos);
 
         expectedPos = new int[][]{{1, 2}, {0, 2}, {0, 1}, {0, 0}};

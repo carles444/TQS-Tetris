@@ -15,4 +15,22 @@ public class ClevelandZTests {
         int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
         assertArrayEquals(clevelandz.getPositions(), expectedPos);
     }
+
+    @Test
+    public void testRotateRightClevelandZ() {
+        int[][] expectedPos = new int[][]{{-1, 2}, {0, 2}, {0, 1}, {1, 1}};
+        assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
+        assertArrayEquals(clevelandz.getPositions(), expectedPos);
+    }
+
+    @Test
+    public void testRotateLeftClevelandZ() {
+        int[][] expectedPos = new int[][]{{1, 1}, {0, 1}, {0, 2}, {-1, 2}};
+        assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+
+        expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
+        assertArrayEquals(clevelandz.getPositions(), expectedPos);
+    }
 }

@@ -2,8 +2,8 @@ package TetrisGame;
 
 //   1 0
 // 3 2
-class Rhodelsland extends Piece {
-    Rhodelsland(int[] initPos) {
+class RhodeIslandZ extends Piece {
+    RhodeIslandZ(int[] initPos) {
         super();
         positions[0] = initPos;
         positions[1] = new int[]{initPos[0], initPos[1] - 1};

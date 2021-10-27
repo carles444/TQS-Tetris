@@ -16,4 +16,16 @@ public class SmashBoyTests {
         int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         assertArrayEquals(smashboy.getPositions(), expectedPos);
     }
+
+    @Test
+    public void testRotateRightSmashBoy() {
+        int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        assertArrayEquals(smashboy.getPositions(), expectedPos);
+    }
+
+    @Test
+    public void testRotateLeftSmashBoy() {
+        int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        assertArrayEquals(smashboy.getPositions(), expectedPos);
+    }
 }
