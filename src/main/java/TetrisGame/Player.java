@@ -29,9 +29,17 @@ public class Player {
         return true;
     }
 
-    public  boolean setTopScore(int topScore){
-        this.topScore=topScore;
-        return true;
+    public  boolean setTopScore(int puntuation){
+        boolean isOkeyFormat=true;
+        boolean ret=false;
+        isOkeyFormat= puntuation<0?false:true;
+        isOkeyFormat=!isOkeyFormat || puntuation>999999?false:true;
+
+        if (isOkeyFormat && isOkeyFormat){
+            ret=true;
+            this.topScore=puntuation;
+        }
+        return ret;
     }
 
 

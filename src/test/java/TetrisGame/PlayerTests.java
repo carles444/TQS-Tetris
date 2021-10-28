@@ -32,11 +32,22 @@ public class PlayerTests {
     }
     @Test
     void setScore(){
-        assertEquals(true, player.setTopScore(-34444444));
-        assertEquals(true, player.setTopScore(-5));
+        assertEquals(false, player.setTopScore(-34444444));
+        assertEquals(false, player.setTopScore(-5));
+        assertEquals(false, player.setTopScore(-1));
+
         assertEquals(true, player.setTopScore(0));
-        assertEquals(true, player.setTopScore(50));
+        assertEquals(true, player.setTopScore(1));
         assertEquals(true, player.setTopScore(10));
+        assertEquals(true, player.setTopScore(500000));
+        assertEquals(true, player.setTopScore(999998));
+        assertEquals(true, player.setTopScore(999999));
+        assertEquals(false, player.setTopScore(1000000));
+        assertEquals(false, player.setTopScore(2000000));
+
+
+
+
 
     }
 
