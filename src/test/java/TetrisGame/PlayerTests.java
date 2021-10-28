@@ -21,22 +21,22 @@ public class PlayerTests {
 
         assertEquals(true, player.setName("Charly"));
         assertEquals(false, player.setName("CharlymikelRichartOssart"));
-
         assertEquals(false, player.setName(" "));
         assertEquals(false, player.setName(""));
-
         assertEquals(false, player.setName("Char Y"));
-
-
         assertEquals(false, player.setName("12345"));
-
         assertEquals(false, player.setName("·$&&"));
-
         assertEquals(false, player.setName("Charly123123"));
-
         assertEquals(false, player.setName("Charly.$&&"));
-
         assertEquals(false, player.setName("Charly123123.%&&"));
+    }
+    @Test
+    void setScore(){
+        assertEquals(true, player.setTopScore(-34444444));
+        assertEquals(true, player.setTopScore(-5));
+        assertEquals(true, player.setTopScore(0));
+        assertEquals(true, player.setTopScore(50));
+        assertEquals(true, player.setTopScore(10));
 
     }
 
