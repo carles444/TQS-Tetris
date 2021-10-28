@@ -26,7 +26,7 @@ public class OrangeRickyTests {
         int[][] expectedPos = new int[][]{{1, 0}, {1, -1}, {0, -1}, {-1, -1}};
         assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
 
-        expectedPos = new int[][]{{1, -2}, {0, -2}, {0, 1}, {0, 0}};
+        expectedPos = new int[][]{{1, -2}, {0, -2}, {0, -1}, {0, 0}};
         assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
 
         expectedPos = new int[][]{{-1, -2}, {-1, -1}, {0, -1}, {1, -1}};
@@ -39,16 +39,16 @@ public class OrangeRickyTests {
     @Test
     public void testRotateLeftOrangeRicky() {
         int[][] expectedPos = new int[][]{{-1, -2}, {-1, -1}, {0, -1}, {1, -1}};
-        assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
+        assertArrayEquals(orangeRicky.rotateLeft(), expectedPos);
 
-        expectedPos = new int[][]{{1, -2}, {0, -2}, {0, 1}, {0, 0}};
-        assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
+        expectedPos = new int[][]{{1, -2}, {0, -2}, {0, -1}, {0, 0}};
+        assertArrayEquals(orangeRicky.rotateLeft(), expectedPos);
 
         expectedPos = new int[][]{{1, 0}, {1, -1}, {0, -1}, {-1, -1}};
-        assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
+        assertArrayEquals(orangeRicky.rotateLeft(), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, -1}, {1, -2}};
-        assertArrayEquals(orangeRicky.rotateRight(), expectedPos);
+        assertArrayEquals(orangeRicky.rotateLeft(), expectedPos);
     }
 }
 
