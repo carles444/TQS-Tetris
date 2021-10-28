@@ -5,15 +5,16 @@ public class Player {
     private String name;
     public Player(){}
 
+
+    public String getName() {
+        return name;
+    }
+
     public  boolean setName(String name){
         boolean isCorrectFormat=comproveName(name);
         this.name=isCorrectFormat?name:"";
         return isCorrectFormat;
     }
-    public String getName() {
-        return name;
-    }
-
     private boolean comproveName(String name){
         if ((name.isEmpty() || name.length()>8)) {
             return false;
@@ -26,7 +27,11 @@ public class Player {
             }
         }
         return true;
+    }
 
+    public  boolean setTopScore(int topScore){
+        this.topScore=topScore;
+        return true;
     }
 
 
