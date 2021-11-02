@@ -37,8 +37,8 @@ public class BoardTests {
 
     @Test
     public void testGetters() {
-        assertEquals(board.getNRows, nRows);
-        assertEquals(board.getNCols, nCols);
+        assertEquals(board.getNRows(), nRows);
+        assertEquals(board.getNCols(), nCols);
     }
 
     @Test
