@@ -35,23 +35,20 @@ public class BoardTests {
         board = new Board(nRows, nCols);
     }
 
-    @Test
-    public void testGetters() {
-        assertEquals(board.getNRows(), nRows);
-        assertEquals(board.getNCols(), nCols);
-    }
 
     @Test
     public void testConstructor() {
         List<List<Integer>> expectedMat = new ArrayList<>();
         for(int i = 0; i < board.getNRows(); i++) {
             expectedMat.add(new ArrayList<Integer>());
-            for(int j = 0; i < board.getNCols(); j++) {
+            for(int j = 0; j < board.getNCols(); j++) {
                 expectedMat.get(i).add(0);
             }
         }
         assertTrue(equalMatrix(expectedMat, board.getMat()));
         assertNotNull(board.getPiece());
+        assertEquals(board.getNRows(), nRows);
+        assertEquals(board.getNCols(), nCols);
     }
 
 }
