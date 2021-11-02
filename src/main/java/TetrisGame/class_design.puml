@@ -74,7 +74,7 @@ Observable -right-> "1" Board
 TetrisGameClient -right-> "0..1" Player
 TetrisGameClient <-down-> "0..1" Game
 Game -left-> "1" Board
-Board -down-> "2"Piece
+Board -down-> "0*"Piece
 Game -right-> "1" Interface
 
 @enduml
