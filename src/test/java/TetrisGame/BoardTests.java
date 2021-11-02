@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTests {
     private Board board;
+    int nRows = 20;
+    int nCols = 10;
     
     public boolean equalMatrix(List<List<Integer>> mat1, List<List<Integer>> mat2) {
         if(mat1.size() != mat2.size())
@@ -28,9 +30,15 @@ public class BoardTests {
     
     @BeforeEach
     public void setUp() {
-        int nRows = 20;
-        int nCols = 10;
+        nRows = 20;
+        nCols = 10;
         board = new Board(nRows, nCols);
+    }
+
+    @Test
+    public void testGetters() {
+        assertEquals(board.getNRows, nRows);
+        assertEquals(board.getNCols, nCols);
     }
 
     @Test

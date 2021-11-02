@@ -35,7 +35,7 @@ class Game {
 abstract class Observable
 class Controls extends Observable
 
-class Board {
+class Board implements Observer {
     + createPiece() : Piece
     + deletePiece()
     + Update(controlKey)
@@ -62,6 +62,9 @@ class Interface {
     + Interface()
 }
 
+Interface Observer {
+    + Update()
+}
 class OrangeRicky extends Piece
 class BlueRicky extends Piece
 class ClevelandZ extends Piece
@@ -70,7 +73,7 @@ class Hero extends Piece
 class Teewee extends Piece
 class Smashboy extends Piece
 
-Observable -right-> "1" Board
+Observable -right-> "*" Observer
 TetrisGameClient -right-> "0..1" Player
 TetrisGameClient <-down-> "0..1" Game
 Game -left-> "1" Board
