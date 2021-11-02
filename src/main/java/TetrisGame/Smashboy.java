@@ -11,4 +11,14 @@ class Smashboy extends  Piece {
         positions[2] = new int[]{initPos[0] + 1, initPos[1]};
         positions[3] = new int[]{initPos[0] + 1, initPos[1] + 1};
     }
+
+    @Override
+    public int[][] rotateRight() {
+        return positions;
+    }
+
+    @Override
+    public int[][] rotateLeft() {
+        return positions;
+    }
 }

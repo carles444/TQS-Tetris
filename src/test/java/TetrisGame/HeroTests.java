@@ -24,15 +24,15 @@ public class HeroTests {
         assertArrayEquals(hero.rotateRight(), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
-        assertArrayEquals(hero.getPositions(), expectedPos);
+        assertArrayEquals(hero.rotateRight(), expectedPos);
     }
 
     @Test
     public void testRotateLeftHero() {
-        int[][] expectedPos = new int[][]{{0, 2}, {-1, 2}, {-2, 2}, {-3, 2}};
+        int[][] expectedPos = new int[][]{{-3, 2}, {-2, 2}, {-1, 2}, {0, 2}};
         assertArrayEquals(hero.rotateRight(), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
-        assertArrayEquals(hero.getPositions(), expectedPos);
+        assertArrayEquals(hero.rotateRight(), expectedPos);
     }
 }
