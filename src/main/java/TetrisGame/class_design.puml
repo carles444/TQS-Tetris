@@ -42,6 +42,7 @@ class Board implements Observer {
     + Board()
     - boardMatrix : vector<vector<color>>
     + isOcupped(row : int, col : int) : boolean
+    - generateRandomPiece() : Piece
 
 
 }

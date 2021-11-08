@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +21,7 @@ public class BoardTests {
         if(mat1.get(0).size() != mat2.get(0).size())
             return false;
         for(int i = 0; i < mat1.size(); i++) {
-            for(int j = 0; i < mat1.get(i).size(); j++){
+            for(int j = 0; j < mat1.get(i).size(); j++){
                 if(!Objects.equals(mat1.get(i).get(j), mat2.get(i).get(j)))
                     return false;
             }
@@ -45,8 +46,9 @@ public class BoardTests {
                 expectedMat.get(i).add(0);
             }
         }
-        assertTrue(equalMatrix(expectedMat, board.getMat()));
+        assertEquals(true, equalMatrix(expectedMat, board.getMat()));
         assertNotNull(board.getPiece());
+        assertEquals("Orange Ricky", board.getPiece().getName());
         assertEquals(board.getNRows(), nRows);
         assertEquals(board.getNCols(), nCols);
     }
