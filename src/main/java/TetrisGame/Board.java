@@ -43,6 +43,41 @@ public class Board {
         piece = generateRandomPiece();
     }
 
+    private boolean fitsBoard(int[][] positions) {
+        for(int[] pos : positions) {
+            if(pos[0] >= getNRows() || pos[1] >= getNCols())
+                return false;
+        }
+        return true;
+    }
+
+    public void movePieceRight(int nPos) {
+        int[][] dest = piece.moveCol(nPos);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
+    }
+
+    public void movePieceLeft(int nPos) {
+        int[][] dest = piece.moveCol(-nPos);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
+    }
+
+    public void movePieceUp(int nPos) {
+        int[][] dest = piece.moveRow(-nPos);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
+    }
+
+    public void movePieceDown(int nPos) {
+        int[][] dest = piece.moveRow(nPos);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
+    }
 
     public List<List<Integer>> getMat() { return matrix; }
     public Piece getPiece() { return piece; }

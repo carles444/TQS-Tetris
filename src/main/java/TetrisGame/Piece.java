@@ -8,21 +8,33 @@ public abstract class Piece {
         positions = new int[pieceDim][2];
     }
     public int[][] moveCol(int nCols){
+        int[][] auxPos = clonePositions();
         for(int i = 0; i < pieceDim; i++){
-            positions[i][1]+=nCols;
+            auxPos[i][1]+=nCols;
         }
-        return positions;
+        return auxPos;
+    }
+
+    private int[][] clonePositions() {
+        int[][] auxPos = new int[pieceDim][2];
+        for(int i = 0; i < pieceDim; i++) {
+            auxPos[i][0] = positions[i][0];
+            auxPos[i][1] = positions[i][1];
+        }
+        return auxPos;
     }
 
     public int[][] getPositions() {
         return positions;
     }
+    public void setPositions(int[][] pos) { positions = pos; }
 
     public int[][] moveRow(int nRows){
+        int[][] auxPos = clonePositions();
         for(int i = 0; i < pieceDim; i++){
-            positions[i][0]+=nRows;
+            auxPos[i][0]+=nRows;
         }
-        return positions;
+        return auxPos;
     }
 
     public int[][] rotateRight() {
