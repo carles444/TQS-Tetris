@@ -48,7 +48,7 @@ public class BoardTests {
         }
         assertEquals(true, equalMatrix(expectedMat, board.getMat()));
         assertNotNull(board.getPiece());
-        assertEquals("Orange Ricky", board.getPiece().getName());
+        assertEquals("OrangeRicky", board.getPiece().getName());
         assertEquals(board.getNRows(), nRows);
         assertEquals(board.getNCols(), nCols);
     }

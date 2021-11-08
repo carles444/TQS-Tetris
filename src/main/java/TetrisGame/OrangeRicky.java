@@ -12,6 +12,11 @@ class OrangeRicky extends Piece {
     }
 
     @Override
+    public String getName() {
+        return "OrangeRicky";
+    }
+
+    @Override
     public int[][] rotateRight() {
         if (positions[0][1] == positions[1][1]) {
             if (positions[0][0] < positions[1][0]) {

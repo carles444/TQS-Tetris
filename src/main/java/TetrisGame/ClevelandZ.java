@@ -12,6 +12,11 @@ class ClevelandZ extends Piece {
     }
 
     @Override
+    public String getName() {
+        return "ClevelandZ";
+    }
+
+    @Override
     public int[][] rotateRight() {
         if (positions[0][1] == positions[1][1]) {
             positions[0][0] += 1;

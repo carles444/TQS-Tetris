@@ -32,6 +32,8 @@ public abstract class Piece {
     public int[][] rotateLeft() {
        return null;
     }
+
+    public String getName() {return null;}
 }
 
 

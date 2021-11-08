@@ -13,6 +13,11 @@ class Smashboy extends  Piece {
     }
 
     @Override
+    public String getName() {
+        return "SmashBoy";
+    }
+
+    @Override
     public int[][] rotateRight() {
         return positions;
     }
