@@ -11,7 +11,7 @@ public class Board {
 
 
     private Piece generateRandomPiece() {
-        GenerateRandomNum rand = new MockGenerateRandomNum();
+        GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
         switch (rand.getRandPieceNum()) {
             case 0:
                 return new OrangeRicky(new int[]{2, 4});

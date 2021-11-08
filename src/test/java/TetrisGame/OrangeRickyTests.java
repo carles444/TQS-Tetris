@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 //    #
 //# # #
-//TODO: afegir comprovador de constructor i adaptar orangeRicky
 public class OrangeRickyTests {
     Piece orangeRicky;
     @BeforeEach
