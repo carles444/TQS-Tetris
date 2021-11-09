@@ -61,6 +61,33 @@ public class BoardTests {
         return true;
     }
 
+    @Test
+    public void testFixPosition() {
+        //right limits
+        int[][] expectedPos = new int[][]{{2, 9}, {3, 9}, {3, 8}, {3, 7}};
+        int[][] test = new int[][]{{2, 20}, {3, 20}, {3, 19}, {3, 19}};
+        board.fixPosition(test);
+        assertArrayEquals(test, expectedPos);
+
+        //left limits
+        expectedPos = new int[][]{{2, 2}, {3, 2}, {3, 1}, {3, 0}};
+        test = new int[][]{{2, -6}, {3, -6}, {3, -7}, {3, -8}};
+        board.fixPosition(test);
+        assertArrayEquals(test, expectedPos);
+
+        //up limits
+        expectedPos = new int[][]{{0, 2}, {1, 2}, {1, 1}, {1, 0}};
+        test = new int[][]{{-2, 2}, {-1, 2}, {-1, 1}, {-1, 0}};
+        board.fixPosition(test);
+        assertArrayEquals(test, expectedPos);
+
+        //down limits
+        expectedPos = new int[][]{{18, 2}, {19, 2}, {19, 1}, {19, 0}};
+        test = new int[][]{{21, 2}, {22, 2}, {22, 1}, {22, 0}};
+        board.fixPosition(test);
+        assertArrayEquals(test, expectedPos);
+    }
+
     @Test  //moves the piece and checks if its positions don't exceed board limits
     public void testBoardLimitsMove() {
         board.movePieceCol(100);
