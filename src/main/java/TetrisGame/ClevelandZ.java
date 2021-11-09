@@ -18,37 +18,39 @@ class ClevelandZ extends Piece {
 
     @Override
     public int[][] rotateRight() {
+        int[][] auxPos = clonePositions();
         if (positions[0][1] == positions[1][1]) {
-            positions[0][0] += 1;
-            positions[0][1] -= 2;
-            positions[1][1] -= 1;
-            positions[2][0] += 1;
-            positions[3][1] += 1;
+            auxPos[0][0] += 1;
+            auxPos[0][1] -= 2;
+            auxPos[1][1] -= 1;
+            auxPos[2][0] += 1;
+            auxPos[3][1] += 1;
         } else {
-            positions[0][0] -= 1;
-            positions[0][1] += 2;
-            positions[1][1] += 1;
-            positions[2][0] -= 1;
-            positions[3][1] -= 1;
+            auxPos[0][0] -= 1;
+            auxPos[0][1] += 2;
+            auxPos[1][1] += 1;
+            auxPos[2][0] -= 1;
+            auxPos[3][1] -= 1;
         }
-        return positions;
+        return auxPos;
     }
 
     @Override
     public int[][] rotateLeft() {
+        int[][] auxPos = clonePositions();
         if (positions[0][1] == positions[1][1]) {
-            positions[0][0] += 1;
-            positions[0][1] -= 2;
-            positions[1][1] -= 1;
-            positions[2][0] += 1;
-            positions[3][1] += 1;
+            auxPos[0][0] += 1;
+            auxPos[0][1] -= 2;
+            auxPos[1][1] -= 1;
+            auxPos[2][0] += 1;
+            auxPos[3][1] += 1;
         } else {
-            positions[0][0] -= 1;
-            positions[0][1] += 2;
-            positions[1][1] += 1;
-            positions[2][0] -= 1;
-            positions[3][1] -= 1;
+            auxPos[0][0] -= 1;
+            auxPos[0][1] += 2;
+            auxPos[1][1] += 1;
+            auxPos[2][0] -= 1;
+            auxPos[3][1] -= 1;
         }
-        return positions;
+        return auxPos;
     }
 }

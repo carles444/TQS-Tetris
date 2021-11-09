@@ -62,7 +62,7 @@ public class BoardTests {
     }
 
     @Test  //moves the piece and checks if its positions don't exceed board limits
-    public void testBoardLimitsMove() {//Todo: test exception negative number
+    public void testBoardLimitsMove() {
         board.movePieceCol(100);
         assertEquals(true, pieceInBoard());
 

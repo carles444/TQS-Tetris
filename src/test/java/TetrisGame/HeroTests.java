@@ -22,6 +22,7 @@ public class HeroTests {
     public void testRotateRightHero() {
         int[][] expectedPos = new int[][]{{-3, 2}, {-2, 2}, {-1, 2}, {0, 2}};
         assertArrayEquals(hero.rotateRight(), expectedPos);
+        hero.setPositions(hero.rotateRight());
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
         assertArrayEquals(hero.rotateRight(), expectedPos);
@@ -31,6 +32,7 @@ public class HeroTests {
     public void testRotateLeftHero() {
         int[][] expectedPos = new int[][]{{-3, 2}, {-2, 2}, {-1, 2}, {0, 2}};
         assertArrayEquals(hero.rotateRight(), expectedPos);
+        hero.setPositions(hero.rotateLeft());
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
         assertArrayEquals(hero.rotateRight(), expectedPos);

@@ -20,6 +20,8 @@ public class ClevelandZTests {
     public void testRotateRightClevelandZ() {
         int[][] expectedPos = new int[][]{{-1, 2}, {0, 2}, {0, 1}, {1, 1}};
         assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+        clevelandz.setPositions(clevelandz.rotateRight());
+
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
         assertArrayEquals(clevelandz.rotateRight(), expectedPos);
@@ -29,6 +31,7 @@ public class ClevelandZTests {
     public void testRotateLeftClevelandZ() {
         int[][] expectedPos = new int[][]{{-1, 2}, {0, 2}, {0, 1}, {1, 1}};
         assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+        clevelandz.setPositions(clevelandz.rotateLeft());
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
         assertArrayEquals(clevelandz.rotateRight(), expectedPos);

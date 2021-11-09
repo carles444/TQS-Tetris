@@ -18,6 +18,7 @@ public class RhodeIslandTests {
     public void testRotateRightRhodeIsland() {
         int[][] expectedPos = new int[][]{{1, -1}, {0, -1}, {0, -2}, {-1, -2}};
         assertArrayEquals(rislandz.rotateRight(), expectedPos);
+        rislandz.setPositions(rislandz.rotateRight());
 
         expectedPos = new int[][]{{0, 0}, {0, -1}, {1, -1}, {1, -2}};
         assertArrayEquals(rislandz.rotateRight(), expectedPos);
@@ -27,6 +28,7 @@ public class RhodeIslandTests {
     public void testRotateLeftRhodeIsland() {
         int[][] expectedPos = new int[][]{{1, -1}, {0, -1}, {0, -2}, {-1, -2}};
         assertArrayEquals(rislandz.rotateLeft(), expectedPos);
+        rislandz.setPositions(rislandz.rotateLeft());
 
         expectedPos = new int[][]{{0, 0}, {0, -1}, {1, -1}, {1, -2}};
         assertArrayEquals(rislandz.rotateLeft(), expectedPos);
