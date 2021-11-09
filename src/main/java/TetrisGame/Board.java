@@ -1,7 +1,7 @@
 package TetrisGame;
 import java.util.ArrayList;
 import java.util.List;
-
+import static TetrisGame.Piece.pieceDim;
 
 
 public class Board {
@@ -51,32 +51,52 @@ public class Board {
         return true;
     }
 
-    public void movePieceRight(int nPos) {
-        int[][] dest = piece.moveCol(nPos);
-        if(fitsBoard(dest)) {
-            piece.setPositions(dest);
+    private boolean canMove(int nRows, int nCols) {
+        int[][] positions = piece.getPositions();
+        for(int i = 0; i < pieceDim; i++) {
+            if(positions[i][0] + nRows >= getNRows())
+                return false;
+            if(positions[i][1] + nCols >= getNCols())
+                return false;
+        }
+        return true;
+    }
+
+    //tries to move the piece nPositions
+    public boolean movePieceCol(int nPos) {
+        if(!canMove(0, nPos))
+            return false;
+        piece.moveCol(nPos);
+        return true;
+    }
+    public boolean movePieceRow(int nPos) {
+        if(!canMove(nPos, 0))
+            return false;
+        piece.moveRow(nPos);
+        return true;
+    }
+
+
+    //move the piece until is it possible 1 by 1
+    public void movePieceColStepped(int nPos) {
+        for(int i = 0; i < nPos; i++) {
+            if(!movePieceCol(1))
+                return;
+        }
+    }
+    public void movePieceRowStepped(int nPos) {
+        for(int i = 0; i < nPos; i++) {
+            if(!movePieceRow(1))
+                return;
         }
     }
 
-    public void movePieceLeft(int nPos) {
-        int[][] dest = piece.moveCol(-nPos);
-        if(fitsBoard(dest)) {
-            piece.setPositions(dest);
-        }
+    public void rotatePieceRight() {
+        piece.rotateRight();
     }
 
-    public void movePieceUp(int nPos) {
-        int[][] dest = piece.moveRow(-nPos);
-        if(fitsBoard(dest)) {
-            piece.setPositions(dest);
-        }
-    }
-
-    public void movePieceDown(int nPos) {
-        int[][] dest = piece.moveRow(nPos);
-        if(fitsBoard(dest)) {
-            piece.setPositions(dest);
-        }
+    public void rotatePieceLeft() {
+        piece.rotateLeft();
     }
 
     public List<List<Integer>> getMat() { return matrix; }

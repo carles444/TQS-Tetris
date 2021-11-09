@@ -63,165 +63,165 @@ public class BoardTests {
 
     @Test  //moves the piece and checks if its positions don't exceed board limits
     public void testBoardLimitsMove() {//Todo: test exception negative number
-        board.movePieceRight(100);
+        board.movePieceCol(100);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceRight(0);
+        board.movePieceCol(0);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceRight(1);
+        board.movePieceCol(1);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceRight(5);
+        board.movePieceCol(5);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceLeft(100);
+        board.movePieceCol(100);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceLeft(0);
+        board.movePieceCol(0);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceLeft(1);
+        board.movePieceCol(1);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceLeft(4);
+        board.movePieceCol(4);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceDown(100);
+        board.movePieceRow(100);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceDown(0);
+        board.movePieceRow(0);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceDown(1);
+        board.movePieceRow(1);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceDown(17);
+        board.movePieceRow(17);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceUp(100);
+        board.movePieceRow(100);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceUp(0);
+        board.movePieceRow(0);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceUp(1);
+        board.movePieceRow(1);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceUp(17);
+        board.movePieceRow(17);
         assertEquals(true, pieceInBoard());
     }
 
     @Test  //rotates the piece and checks if its positions don't exceed board limits
     public void testBoardLimitsRotate() {
         //right limit
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
 
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceRightStepped(30);
+        board.movePieceColStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
 
 
         //left limit
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
 
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceLeftStepped(30);
+        board.movePieceColStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
 
 
         //down limit
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
 
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceDownStepped(30);
+        board.movePieceRowStepped(30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
 
 
         //up limit
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceRight();
         assertEquals(true, pieceInBoard());
 
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
-        board.movePieceUpStepped(30);
+        board.movePieceRowStepped(-30);
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
 
