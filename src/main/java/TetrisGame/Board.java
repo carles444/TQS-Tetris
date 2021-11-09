@@ -1,7 +1,8 @@
 package TetrisGame;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.lang.Math;
+import static TetrisGame.Piece.pieceDim;
 
 public class Board {
     public static final int N_PIECES = 7;
@@ -46,6 +47,8 @@ public class Board {
         for(int[] pos : positions) {
             if(pos[0] >= getNRows() || pos[1] >= getNCols())
                 return false;
+            if(pos[0] < 0 || pos[1] < 0)
+                return false;
         }
         return true;
     }
@@ -85,19 +88,44 @@ public class Board {
         }
     }
 
-    public void fixRotation(int[][] positions) {
-        //TODO: implement method
+    //fix the position when the piece rotates if its needed
+    public void fixPosition(int[][] positions) {
+        int rowM = 0, colM = 0;
+        if(fitsBoard(positions))
+            return;
+        for(int i = 0; i < pieceDim; i++) {
+            if(positions[i][0] >= getNRows()) {
+                rowM = (getNRows() - 1) - positions[i][0];
+            }
+            else if(positions[i][0] < 0) {
+                rowM = (-positions[i][0]);
+            }
+            else if(positions[i][1] >= getNCols()) {
+                colM = ((getNCols() - 1) - positions[i][1]);
+            }
+            else if(positions[i][1] < 0) {
+                colM = (-positions[i][1]);
+            }
+            if(colM!=0 || rowM!=0) {
+                for(int j = 0; j < pieceDim; j++) {
+                    positions[j][0] += rowM;
+                    positions[j][1] += colM;
+                }
+                rowM = 0;
+                colM = 0;
+            }
+        }
     }
 
     public void rotatePieceRight() {
         int[][] dest = piece.rotateRight();
-        fixRotation(dest);
+        fixPosition(dest);
         piece.setPositions(dest);
     }
 
     public void rotatePieceLeft() {
         int[][] dest = piece.rotateLeft();
-        fixRotation(dest);
+        fixPosition(dest);
         piece.setPositions(dest);
     }
 

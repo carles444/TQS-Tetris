@@ -65,7 +65,7 @@ public class BoardTests {
     public void testFixPosition() {
         //right limits
         int[][] expectedPos = new int[][]{{2, 9}, {3, 9}, {3, 8}, {3, 7}};
-        int[][] test = new int[][]{{2, 20}, {3, 20}, {3, 19}, {3, 19}};
+        int[][] test = new int[][]{{2, 20}, {3, 20}, {3, 19}, {3, 18}};
         board.fixPosition(test);
         assertArrayEquals(test, expectedPos);
 
