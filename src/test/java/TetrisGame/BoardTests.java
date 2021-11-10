@@ -269,5 +269,28 @@ public class BoardTests {
 
     }
 
+    @Test
+    public void testDeleteFullRows() {
+        List<List<Integer>> expectedMat = new ArrayList<>();
+        for(int i = 0; i < board.getNRows(); i++) {
+            expectedMat.add(new ArrayList<Integer>());
+            for (int j = 0; j < board.getNCols(); j++) {
+                expectedMat.get(i).add(0);
+            }
+        }
+        List<List<Integer>> testMat = board.getMat();
+        for(int i = 0; i < board.getNCols(); i++) {
+            testMat.get(board.getNRows()-1).set(i, 1);
+        }
+        testMat.get(board.getNRows()-2).set(1, 1);
+        testMat.get(board.getNRows()-2).set(3, 1);
+
+        expectedMat.get(board.getNRows()-1).set(1, 1);
+        expectedMat.get(board.getNRows()-1).set(3, 1);
+
+        board.deleteFullRows();
+        assertEquals(true, equalMatrix(expectedMat, testMat));
+    }
+
 
 }
