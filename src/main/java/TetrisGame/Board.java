@@ -10,7 +10,7 @@ import static TetrisGame.Piece.pieceDim;
 public class Board {
     public static final int N_PIECES = 7;
     private final List<List<Integer>> matrix;
-    private final Piece piece;
+    private Piece piece;
     //private Timer timer;
     private static final long timeInterval = 500; //millis
     private int nPieces;
@@ -30,7 +30,7 @@ public class Board {
         TimerTask tick = new TimerTask() {
             @Override
             public void run() {
-                movePieceRow(1);
+                movePieceDown();
             }
         };
         //timer = new Timer(true);
@@ -41,29 +41,28 @@ public class Board {
 
     private Piece generateRandomPiece() {
         GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
+        nPieces++;
         switch (rand.getRandPieceNum()) {
             case 0:
-                return new OrangeRicky(new int[]{2, 4});
+                return new OrangeRicky(new int[]{0, 5});
             case 1:
-                return new BlueRicky(new int[]{2, 4});
+                return new BlueRicky(new int[]{0, 5});
             case 2:
-                return new ClevelandZ(new int[]{2, 4});
+                return new ClevelandZ(new int[]{0, 6});
             case 3:
-                return new RhodeIslandZ(new int[]{2, 4});
+                return new RhodeIslandZ(new int[]{0, 5});
             case 4:
-                return new Hero(new int[]{2, 4});
+                return new Hero(new int[]{0, 5});
             case 5:
-                return new Teewee(new int[]{2, 4});
+                return new Teewee(new int[]{0, 5});
             case 6:
-                return new Smashboy(new int[]{2, 4});
+                return new Smashboy(new int[]{0, 5});
             default:
+                nPieces--;
                 return null;
         }
     }
 
-    public void checkState() {
-        //check if rows are full, if so delete it and make all cubes go down
-    }
 
     private boolean fitsBoard(int[][] positions) {
         for(int[] pos : positions) {
@@ -79,8 +78,8 @@ public class Board {
 
 
     //tries to move the piece nPositions
-    public boolean movePieceCol(int nPos) {
-        int[][] dest = piece.moveCol(nPos);
+    public boolean movePieceRight() {
+        int[][] dest = piece.moveCol(1);
         if(fitsBoard(dest)) {
             piece.setPositions(dest);
             return true;
@@ -88,8 +87,32 @@ public class Board {
         return false;
     }
 
-    public boolean movePieceRow(int nPos) {
-        int[][] dest = piece.moveRow(nPos);
+    public boolean movePieceLeft() {
+        int[][] dest = piece.moveCol(-1);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean movePieceDown() {
+        int[][] dest = piece.moveRow(1);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+            return true;
+        }
+        else { //piece touches ground and generates new piece
+            for(int[] pos : piece.getPositions()) {
+                matrix.get(pos[0]).set(pos[1], 1);
+            }
+            piece = generateRandomPiece();
+        }
+        return false;
+    }
+
+    public boolean movePieceUp() {
+        int[][] dest = piece.moveRow(-1);
         if(fitsBoard(dest)) {
             piece.setPositions(dest);
             return true;
@@ -99,16 +122,37 @@ public class Board {
 
 
     //move the piece until is it possible 1 by 1
-    public void movePieceColStepped(int nPos) {
-        for(int i = 0; i < nPos; i++) {
-            if(!movePieceCol(1))
-                return;
+    public void movePieceNCols(int nPos) {
+        boolean right = nPos > 0;
+        if(right) {
+            for (int i = 0; i < nPos; i++) {
+                if (!movePieceRight())
+                    return;
+            }
+        }
+        else {
+            nPos = -nPos;
+            for (int i = 0; i < nPos; i++) {
+                if (!movePieceLeft())
+                    return;
+            }
         }
     }
-    public void movePieceRowStepped(int nPos) {
-        for(int i = 0; i < nPos; i++) {
-            if(!movePieceRow(1))
-                return;
+
+    public void movePieceNRows(int nPos) {
+        boolean down = nPos > 0;
+        if(down) {
+            for (int i = 0; i < nPos; i++) {
+                if (!movePieceDown())
+                    return;
+            }
+        }
+        else {
+            nPos = -nPos;
+            for (int i = 0; i < nPos; i++) {
+                if (!movePieceUp())
+                    return;
+            }
         }
     }
 
@@ -144,13 +188,17 @@ public class Board {
     public void rotatePieceRight() {
         int[][] dest = piece.rotateRight();
         fixPosition(dest);
-        piece.setPositions(dest);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
     }
 
     public void rotatePieceLeft() {
         int[][] dest = piece.rotateLeft();
         fixPosition(dest);
-        piece.setPositions(dest);
+        if(fitsBoard(dest)) {
+            piece.setPositions(dest);
+        }
     }
 
     private void deleteRow(int row) {
@@ -190,9 +238,9 @@ public class Board {
             matrix.get(pos[0]).set(pos[1], 1);
         }
 
-        for(int i = 0; i < matrix.size(); i++){
-            for(int j = 0; j < matrix.get(i).size(); j++) {
-                if(matrix.get(i).get(j) == 1) {
+        for (List<Integer> integers : matrix) {
+            for (Integer integer : integers) {
+                if (integer == 1) {
                     out.append("  0");
                 }
             }
