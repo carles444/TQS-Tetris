@@ -2,6 +2,8 @@ package TetrisGame;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -308,6 +310,7 @@ public class BoardTests {
 
         board.deleteFullRows();
         assertEquals(true, equalMatrix(expectedMat, testMat));
+        assertEquals(1, board.getNCompletedRows());
     }
 
 

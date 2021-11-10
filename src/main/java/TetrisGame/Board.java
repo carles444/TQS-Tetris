@@ -14,12 +14,14 @@ public class Board {
     //private Timer timer;
     private static final long timeInterval = 500; //millis
     private int nPieces;
+    private int nCompletedRows;
 
 
     //TODO: method that checks if the piece touches ground or any piece going down
 
     public Board(int nRows, int nCols) {
         nPieces = 0;
+        nCompletedRows = 0;
         matrix = new ArrayList<>();
         for(int i = 0; i < nRows; i++) {
             matrix.add(new ArrayList<Integer>());
@@ -221,8 +223,10 @@ public class Board {
                     break;
                 }
             }
-            if(full)
+            if(full) {
                 deleteRow(i);
+                nCompletedRows++;
+            }
         }
     }
 
@@ -231,6 +235,7 @@ public class Board {
     public int getNRows() { return matrix.size(); }
     public int getNCols() { return matrix.get(0).size(); }
     public int getNPieces() { return nPieces; }
+    public int getNCompletedRows() { return nCompletedRows; }
 
     public String toString() {
         StringBuilder out = new StringBuilder();
