@@ -21,6 +21,12 @@ public class TetrisGameClient {
         return USER_FILE;
     }
 
+    public boolean login(String userName, String password){
+
+        return false;
+    }
+
+
     public boolean createUser(String userName, String pasword) throws IOException, ParseException {
         return ( isPasswordFormatCorrect(pasword)&&isUserNameFormatCorrect(userName))?addUser(userName,pasword):false;
 

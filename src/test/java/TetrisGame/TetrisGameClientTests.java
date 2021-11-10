@@ -54,8 +54,35 @@ public class TetrisGameClientTests {
     }
     @Test
     void createUser() throws IOException, ParseException {
-        //assertEquals(true, tetrisGame.createUser("Charly","1eG$5dg@"));
-        assertEquals(false ,tetrisGame.createUser("loco","1eG$5dg@"));
+        assertEquals(true, tetrisGame.createUser("Carlos","1eG$5dg@"));
+        assertEquals(true ,tetrisGame.createUser("Ivan","2fG$6dg@"));
+        assertEquals(true ,tetrisGame.createUser("David","3gG$7dg@"));
+        assertEquals(true ,tetrisGame.createUser("Miguel","4hG$8dg@"));
+
+        assertEquals(false, tetrisGame.createUser("Carlos","1eG$5dg@"));
+        assertEquals(false ,tetrisGame.createUser("Ivan","2fG$6dg@"));
+        assertEquals(false ,tetrisGame.createUser("David","3gG$7dg@"));
+        assertEquals(false ,tetrisGame.createUser("Miguel","4hG$8dg@"));
+
+
     }
-    
+    @Test
+    void login()
+    {
+        assertEquals(true, tetrisGame.login("Carlos","1eG$5dg@"));
+        assertEquals(true ,tetrisGame.login("Ivan","2fG$6dg@"));
+        assertEquals(true ,tetrisGame.login("David","3gG$7dg@"));
+        assertEquals(true ,tetrisGame.login("Miguel","4hG$8dg@"));
+//contraseña incorrecta
+        assertEquals(false, tetrisGame.login("Carlos","0aA$5dg@"));
+        assertEquals(false ,tetrisGame.login("Ivan","0aA$6dg@"));
+        assertEquals(false ,tetrisGame.login("David","0aA$7dg@"));
+        assertEquals(false ,tetrisGame.login("Miguel","0aA$8dg@"));
+//usuario incorrecta
+
+        assertEquals(false, tetrisGame.login("Maria","1eG$5dg@"));
+        assertEquals(false ,tetrisGame.login("Carmen","2fG$6dg@"));
+        assertEquals(false ,tetrisGame.login("Andrea","3gG$7dg@"));
+        assertEquals(false ,tetrisGame.login("Estela","4hG$8dg@"));
+    }
 }
