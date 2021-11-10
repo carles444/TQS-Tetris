@@ -36,6 +36,21 @@ public class BoardTests {
         board = new Board(nRows, nCols);
     }
 
+    @Test
+    public void testUsedPositions() {
+        List<List<Integer>> matrix = board.getMat();
+        int[][] expectedPos = new int[][]{{2, 6}, {3, 6}, {3, 5}, {3, 4}};
+        int[][] test = new int[][]{{2, 4}, {3, 4}, {3, 3}, {3, 2}};
+        matrix.get(2).set(7, 1);
+        board.movePieceColStepped(30);
+        assertArrayEquals(test, expectedPos);
+
+        expectedPos = new int[][]{{2, 9}, {3, 9}, {3, 8}, {3, 7}};
+        test = new int[][]{{2, 4}, {3, 4}, {3, 3}, {3, 2}};
+        matrix.get(5).set(4, 1);
+        board.movePieceRowStepped(30);
+        assertArrayEquals(test, expectedPos);
+    }
 
     @Test
     public void testBasicConstructor() {

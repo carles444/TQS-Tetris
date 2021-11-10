@@ -2,13 +2,42 @@ package TetrisGame;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Math;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static TetrisGame.Piece.pieceDim;
 
 public class Board {
     public static final int N_PIECES = 7;
-    private List<List<Integer>> matrix;
-    private Piece piece;
+    private final List<List<Integer>> matrix;
+    private final Piece piece;
+    private Timer timer;
+    private static final long timeInterval = 500; //millis
+    private int nPieces;
 
+
+    //TODO: method that checks if the piece touches ground or any piece going down
+
+    public Board(int nRows, int nCols) {
+        nPieces = 0;
+        matrix = new ArrayList<>();
+        for(int i = 0; i < nRows; i++) {
+            matrix.add(new ArrayList<Integer>());
+            for(int j = 0; j < nCols; j++) {
+                matrix.get(i).add(0);
+            }
+        }
+        TimerTask tick = new TimerTask() {
+            @Override
+            public void run() {
+                movePieceRow(1);
+            }
+        };
+        timer = new Timer(true);
+        piece = generateRandomPiece();
+        //every 0.5 secs moves the piece one row down
+        timer.scheduleAtFixedRate(tick, 0, timeInterval);
+    }
 
     private Piece generateRandomPiece() {
         GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
@@ -32,15 +61,8 @@ public class Board {
         }
     }
 
-    public Board(int nRows, int nCols) {
-        matrix = new ArrayList<>();
-        for(int i = 0; i < nRows; i++) {
-            matrix.add(new ArrayList<Integer>());
-            for(int j = 0; j < nCols; j++) {
-                matrix.get(i).add(0);
-            }
-        }
-        piece = generateRandomPiece();
+    public void checkState() {
+        //check if rows are full, if so delete it and make all cubes go down
     }
 
     private boolean fitsBoard(int[][] positions) {
@@ -133,4 +155,27 @@ public class Board {
     public Piece getPiece() { return piece; }
     public int getNRows() { return matrix.size(); }
     public int getNCols() { return matrix.get(0).size(); }
+    public int getNPieces() { return nPieces; }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        for(int[] pos : piece.getPositions()) {
+            matrix.get(pos[0]).set(pos[1], 1);
+        }
+
+        for(int i = 0; i < matrix.size(); i++){
+            for(int j = 0; j < matrix.get(i).size(); j++) {
+                if(matrix.get(i).get(j) == 1) {
+                    out.append("  0");
+                }
+                out.append("\n");
+            }
+        }
+
+        for(int[] pos : piece.getPositions()) {
+            matrix.get(pos[0]).set(pos[1], 0);
+        }
+
+        return out.toString();
+    }
 }
