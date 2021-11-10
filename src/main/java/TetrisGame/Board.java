@@ -153,6 +153,31 @@ public class Board {
         piece.setPositions(dest);
     }
 
+    private void deleteRow(int row) {
+        for(int i = row; i > 1; i--) {
+            for(int j = 0; j < getNCols(); j++) {
+                matrix.get(i).set(j, matrix.get(i-1).get(j));
+            }
+        }
+        for(int j = 0; j < getNCols(); j++) {
+            matrix.get(0).set(j, 0);
+        }
+    }
+
+    public void deleteFullRows() {
+        for(int i = 0; i < getNRows(); i++) {
+            boolean full = true;
+            for(int j = 0; j < getNCols(); j++) {
+                if(matrix.get(i).get(j) == 0) {
+                    full = false;
+                    break;
+                }
+            }
+            if(full)
+                deleteRow(i);
+        }
+    }
+
     public List<List<Integer>> getMat() { return matrix; }
     public Piece getPiece() { return piece; }
     public int getNRows() { return matrix.size(); }
