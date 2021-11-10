@@ -84,6 +84,7 @@ public class BoardTests {
         assertEquals("OrangeRicky", board.getPiece().getName());
         assertEquals(board.getNRows(), nRows);
         assertEquals(board.getNCols(), nCols);
+        assertEquals(false, board.isEnded());
     }
 
     boolean pieceInBoard() {
