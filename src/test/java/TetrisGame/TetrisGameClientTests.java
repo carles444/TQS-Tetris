@@ -1,9 +1,13 @@
 package TetrisGame;
 
+import net.minidev.json.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -18,45 +22,40 @@ public class TetrisGameClientTests {
     void setUp() {
         tetrisGame = new TetrisGameClient();
     }
-    //pasword de 8 caracteres tiene que contener minusculas, mayusculas, numeros, y caracteres especiales
+    // El nombre de usuario solo puede contener hasta 8 letras
     @Test
-    void login(){
-        //el pasword correcte usuari erroni
-        assertEquals(false, tetrisGame.createUser("CharlymikelRichartOssart","1eG$5dg@"));
-        assertEquals(false, tetrisGame.createUser(" ","1eG$5dg@"));
-        assertEquals(false,tetrisGame.createUser("","1eG$5dg@"));
-        assertEquals(false, tetrisGame.createUser("Char Y","1eG$5dg@"));
-        assertEquals(false,tetrisGame.createUser("12345","1eG$5dg@"));
-        assertEquals(false,tetrisGame.createUser("·$&&","1eG$5dg@"));
-        assertEquals(false, tetrisGame.createUser("Charly123123","1eG$5dg@"));
-        assertEquals(false, tetrisGame.createUser("Charly.$&&","1eG$5dg@"));
-        assertEquals(false, tetrisGame.createUser("Charly123123.%&&","1eG$5dg@"));
-        //el pasword correcte usuari erroni
-        assertEquals(false, tetrisGame.createUser("Charly","a"));
-        assertEquals(false, tetrisGame.createUser("Charly",""));
+    void userNameFormatCorrect(){
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect("CharlymikelRichartOssart"));
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect(" "));
+        assertEquals(false,tetrisGame.isUserNameFormatCorrect(""));
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect("Char Y"));
+        assertEquals(false,tetrisGame.isUserNameFormatCorrect("12345"));
+        assertEquals(false,tetrisGame.isUserNameFormatCorrect("·$&&"));
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect("Charly123123"));
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect("Charly.$&&"));
+        assertEquals(false, tetrisGame.isUserNameFormatCorrect("Charly123123.%&&"));
 
-        assertEquals(false,tetrisGame.createUser("Charly"," "));
-        assertEquals(false, tetrisGame.createUser("Charly","aaaaaaaaa"));
-
-        assertEquals(false, tetrisGame.createUser("Charly","acvd1265"));
-
-        assertEquals(false, tetrisGame.createUser("Charly","ahsjdk#~€¬"));
-        assertEquals(false, tetrisGame.createUser("Charly","1659@€¬$"));
-
-        assertEquals(false, tetrisGame.createUser("Charly","akjfafngjnakjfgnkdjf"));
-        assertEquals(false, tetrisGame.createUser("Charly","a"));
-        //Correcto
-        assertEquals(true, tetrisGame.createUser("Charly","1eG$5dg@"));
-        assertEquals(true,tetrisGame.createUser("loco","1eG$5dg@"));
-
-
-
-
-
-
-
-
+    }
+    //La contraseña a de ser de 8 caracteres y tiene que contener minusculas, mayusculas, numeros, y caracteres especiales
+    @Test
+    void passwordFormatCorrect()
+    {
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("a"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect(""));
+        assertEquals(false,tetrisGame.isPasswordFormatCorrect(" "));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("aaaaaaaaa"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("acvd1265"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("ahsjdk#~€¬"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("1659@€¬$"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("akjfafngjnakjfgnkdjf"));
+        assertEquals(false, tetrisGame.isPasswordFormatCorrect("1eG$5dg@"));
 
 
     }
+    @Test
+    void createUser() throws IOException, ParseException {
+        //assertEquals(true, tetrisGame.createUser("Charly","1eG$5dg@"));
+        assertEquals(false ,tetrisGame.createUser("loco","1eG$5dg@"));
+    }
+    
 }
