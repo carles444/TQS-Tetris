@@ -76,7 +76,7 @@ class Smashboy extends Piece
 
 Observable -right-> "*" Observer
 TetrisGameClient -right-> "0..1" Player
-TetrisGameClient <-down-> "0..1" Game
+TetrisGameClient -down-> "0..1" Game
 Game -left-> "1" Board
 Board -down-> "0*"Piece
 Game -right-> "1" Interface
