@@ -26,10 +26,19 @@ public class Game {
         timer.scheduleAtFixedRate(tick, 0, timeInterval);
     }
 
+    public void start() {
+
+    }
+
+    public void stop() {
+
+    }
+
     public void gameLoop() {
 
     }
 
+    public boolean gameEnd() { return board.isEnded(); }
     public int getScore() { return score; }
     public Board getBoard() { return board; }
     public boolean isRunning() { return isRuning; }

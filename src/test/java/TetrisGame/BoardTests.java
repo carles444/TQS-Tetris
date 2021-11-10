@@ -314,5 +314,12 @@ public class BoardTests {
         assertEquals(1, board.getNCompletedRows());
     }
 
+    @Test
+    public void testIsEnded() {
+        List<List<Integer>> matrix = board.getMat();
+        Integer old = matrix.get(0).set(5, 1);
+        board.movePieceNRows(30);
+        assertEquals(true, board.isEnded());
+    }
 
 }

@@ -15,11 +15,13 @@ public class Board {
     private static final long timeInterval = 500; //millis
     private int nPieces;
     private int nCompletedRows;
+    private boolean ended;
 
 
     //TODO: method that checks if the piece touches ground or any piece going down
 
     public Board(int nRows, int nCols) {
+        ended = false;
         nPieces = 0;
         nCompletedRows = 0;
         matrix = new ArrayList<>();
@@ -109,6 +111,8 @@ public class Board {
                 matrix.get(pos[0]).set(pos[1], 1);
             }
             piece = generateRandomPiece();
+            if(fitsBoard(piece.getPositions()))
+                ended = true;
         }
         return false;
     }
@@ -236,6 +240,7 @@ public class Board {
     public int getNCols() { return matrix.get(0).size(); }
     public int getNPieces() { return nPieces; }
     public int getNCompletedRows() { return nCompletedRows; }
+    public boolean isEnded() { return ended;}
 
     public String toString() {
         StringBuilder out = new StringBuilder();
