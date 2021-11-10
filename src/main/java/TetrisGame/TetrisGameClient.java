@@ -21,8 +21,14 @@ public class TetrisGameClient {
         return USER_FILE;
     }
 
-    public boolean login(String userName, String password){
-
+    public boolean login(String userName, String password) throws FileNotFoundException {
+        InputStream is = new FileInputStream(new File(this.USER_FILE));
+        JSONTokener tokener = new JSONTokener(is);
+        JSONObject jsonObject = new JSONObject(tokener);
+        if (!jsonObject.isNull(userName)){
+            String passwordTemp=jsonObject.getString(userName);
+            return passwordTemp.equals(password);
+        }
         return false;
     }
 
