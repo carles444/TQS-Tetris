@@ -11,7 +11,7 @@ public class Board {
     public static final int N_PIECES = 7;
     private final List<List<Integer>> matrix;
     private final Piece piece;
-    private Timer timer;
+    //private Timer timer;
     private static final long timeInterval = 500; //millis
     private int nPieces;
 
@@ -33,10 +33,10 @@ public class Board {
                 movePieceRow(1);
             }
         };
-        timer = new Timer(true);
+        //timer = new Timer(true);
         piece = generateRandomPiece();
         //every 0.5 secs moves the piece one row down
-        timer.scheduleAtFixedRate(tick, 0, timeInterval);
+        //timer.scheduleAtFixedRate(tick, 0, timeInterval);
     }
 
     private Piece generateRandomPiece() {
@@ -70,6 +70,8 @@ public class Board {
             if(pos[0] >= getNRows() || pos[1] >= getNCols())
                 return false;
             if(pos[0] < 0 || pos[1] < 0)
+                return false;
+            if(matrix.get(pos[0]).get(pos[1]) == 1)
                 return false;
         }
         return true;
@@ -168,8 +170,8 @@ public class Board {
                 if(matrix.get(i).get(j) == 1) {
                     out.append("  0");
                 }
-                out.append("\n");
             }
+            out.append("\n");
         }
 
         for(int[] pos : piece.getPositions()) {
