@@ -49,6 +49,13 @@ public class  Game {
 
     public void start() {
         if(!isRuning) {
+            TimerTask tick = new TimerTask() {
+                @Override
+                public void run() {
+                    board.movePieceDown();
+                }
+            };
+            timer = new Timer(true);
             timer.scheduleAtFixedRate(tick, 0, timeInterval);
             isRuning = true;
         }
@@ -57,6 +64,7 @@ public class  Game {
     public void stop() {
         if(isRuning) {
             timer.cancel();
+            timer = null;
             isRuning = false;
         }
     }
