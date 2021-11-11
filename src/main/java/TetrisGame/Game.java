@@ -3,7 +3,7 @@ package TetrisGame;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game {
+public class  Game {
     private Board board;
     private Timer timer;
     private int score;
