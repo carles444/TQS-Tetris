@@ -19,7 +19,10 @@ public class  Game {
     };
 
     public Game() {
+        Controls controls=new Controls();
         board = Board.getInstance();
+        controls.addObserver(board);
+
         score = 0;
         isRuning = true;
         timer = new Timer(true);

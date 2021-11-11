@@ -1,13 +1,12 @@
 package TetrisGame;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.*;
 import java.lang.Math;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static TetrisGame.Piece.pieceDim;
 
-public class Board {
+public class Board implements Observer {
     public static final int N_PIECES = 7;
     private final List<List<Integer>> matrix;
     private Piece piece;
@@ -33,6 +32,7 @@ public class Board {
             }
         }
         piece = generateRandomPiece();
+
     }
 
     public static Board getInstance() {
@@ -275,4 +275,30 @@ public class Board {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        KeyEvent e= (KeyEvent) arg;
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_RIGHT:
+                System.out.println("right");
+                break;
+            case KeyEvent.VK_LEFT:
+                System.out.println("left");
+
+                break;
+            case KeyEvent.VK_UP:
+                System.out.println("up");
+
+                break;
+            case KeyEvent.VK_DOWN:
+                System.out.println("dow");
+
+                break;
+
+
+
+        }
+
+
+    }
 }
