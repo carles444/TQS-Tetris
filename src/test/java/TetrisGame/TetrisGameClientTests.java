@@ -1,6 +1,5 @@
 package TetrisGame;
 
-import net.minidev.json.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,7 +53,7 @@ public class TetrisGameClientTests {
 
     }
     @Test
-    void createUser() throws IOException, ParseException {
+    void createUser() throws IOException {
         assertEquals(true, tetrisGame.createUser("Carlos","1eG$5dg@"));
         assertEquals(true ,tetrisGame.createUser("Ivan","2fG$6dg@"));
         assertEquals(true ,tetrisGame.createUser("David","3gG$7dg@"));

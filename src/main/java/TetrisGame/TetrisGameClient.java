@@ -1,7 +1,6 @@
 package TetrisGame;
 
-import net.minidev.json.parser.JSONParser;
-import net.minidev.json.parser.ParseException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -33,13 +32,13 @@ public class TetrisGameClient {
     }
 
 
-    public boolean createUser(String userName, String pasword) throws IOException, ParseException {
+    public boolean createUser(String userName, String pasword) throws IOException {
         return ( isPasswordFormatCorrect(pasword)&&isUserNameFormatCorrect(userName))?addUser(userName,pasword):false;
 
     }
 
 
-    private boolean addUser(String userName,String password) throws IOException, ParseException {
+    private boolean addUser(String userName,String password) throws IOException {
 
 
         boolean createUserIsOkey=true;
