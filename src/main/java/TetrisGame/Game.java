@@ -27,16 +27,45 @@ public class Game {
         timer.scheduleAtFixedRate(tick, 0, timeInterval);
     }
 
+    public static void clearConsole()
+    {
+        try
+        {
+            final String os = System.getProperty("os.name");
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public void start() {
-        timer.scheduleAtFixedRate(tick, 0, timeInterval);
+        if(!isRuning) {
+            timer.scheduleAtFixedRate(tick, 0, timeInterval);
+            isRuning = true;
+        }
     }
 
     public void stop() {
-        timer.cancel();
+        if(isRuning) {
+            timer.cancel();
+            isRuning = false;
+        }
     }
 
     public void gameLoop() {
-
+        while(isRuning && !board.isEnded()) {
+            clearConsole();
+            System.out.println(board);
+        }
     }
 
     public boolean gameEnd() { return board.isEnded(); }

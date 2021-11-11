@@ -36,7 +36,7 @@ public class Board {
     }
 
     public static Board getInstance() {
-        if(instance==null)
+        if(instance == null)
             instance = new Board(20, 10);
         return instance;
     }
