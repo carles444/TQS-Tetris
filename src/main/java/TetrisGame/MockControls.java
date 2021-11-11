@@ -4,9 +4,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class MockControls {
-  Robot roobot= new Robot();
+  Robot roobot;
 
   public MockControls() throws AWTException {
+    roobot= new Robot();
   }
 
   public void pressKeyRight(){
