@@ -11,27 +11,28 @@ public class Game {
     private static long timeInterval = 500;
     public static int nRows = 20;
     public static int nCols = 10;
+    TimerTask tick = new TimerTask() {
+        @Override
+        public void run() {
+            board.movePieceDown();
+        }
+    };
 
     public Game() {
-        board = new Board(nRows, nCols);
+        board = Board.getInstance();
         score = 0;
         isRuning = true;
         timer = new Timer(true);
-        TimerTask tick = new TimerTask() {
-            @Override
-            public void run() {
-                board.movePieceDown();
-            }
-        };
+
         timer.scheduleAtFixedRate(tick, 0, timeInterval);
     }
 
     public void start() {
-
+        timer.scheduleAtFixedRate(tick, 0, timeInterval);
     }
 
     public void stop() {
-
+        timer.cancel();
     }
 
     public void gameLoop() {

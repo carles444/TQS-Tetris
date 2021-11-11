@@ -16,11 +16,12 @@ public class Board {
     private int nPieces;
     private int nCompletedRows;
     private boolean ended;
+    static Board instance;
 
 
     //TODO: method that checks if the piece touches ground or any piece going down
 
-    public Board(int nRows, int nCols) {
+    private Board(int nRows, int nCols) {
         ended = false;
         nPieces = 0;
         nCompletedRows = 0;
@@ -31,16 +32,17 @@ public class Board {
                 matrix.get(i).add(0);
             }
         }
-        TimerTask tick = new TimerTask() {
-            @Override
-            public void run() {
-                movePieceDown();
-            }
-        };
-        //timer = new Timer(true);
         piece = generateRandomPiece();
-        //every 0.5 secs moves the piece one row down
-        //timer.scheduleAtFixedRate(tick, 0, timeInterval);
+    }
+
+    public static Board getInstance() {
+        if(instance==null)
+            instance = new Board(20, 10);
+        return instance;
+    }
+
+    public void deleteBoard() {
+        instance = null;
     }
 
     private Piece generateRandomPiece() {
@@ -111,7 +113,7 @@ public class Board {
                 matrix.get(pos[0]).set(pos[1], 1);
             }
             piece = generateRandomPiece();
-            if(fitsBoard(piece.getPositions()))
+            if(!fitsBoard(piece.getPositions()))
                 ended = true;
         }
         return false;
@@ -243,12 +245,22 @@ public class Board {
     public boolean isEnded() { return ended;}
 
     public String toString() {
-        StringBuilder out = new StringBuilder();
-        for(int[] pos : piece.getPositions()) {
-            matrix.get(pos[0]).set(pos[1], 1);
+        //clone matrix
+        List<List<Integer>> mat = new ArrayList<>();
+        for(int i = 0; i < getNRows(); i++) {
+            mat.add(new ArrayList<Integer>());
+            for(int j = 0; j < getNCols(); j++) {
+                mat.get(i).add(matrix.get(i).get(j));
+            }
         }
 
-        for (List<Integer> integers : matrix) {
+        //put piece positions
+        StringBuilder out = new StringBuilder();
+        for(int[] pos : piece.getPositions()) {
+            mat.get(pos[0]).set(pos[1], 1);
+        }
+
+        for (List<Integer> integers : mat) {
             for (Integer integer : integers) {
                 if (integer == 1) {
                     out.append("  0");
@@ -257,10 +269,10 @@ public class Board {
             out.append("\n");
         }
 
-        for(int[] pos : piece.getPositions()) {
-            matrix.get(pos[0]).set(pos[1], 0);
-        }
+
 
         return out.toString();
     }
+
+
 }

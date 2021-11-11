@@ -1,5 +1,6 @@
 package TetrisGame;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +35,12 @@ public class BoardTests {
     public void setUp() {
         nRows = 20;
         nCols = 10;
-        board = new Board(nRows, nCols);
+        board = Board.getInstance();
+    }
+
+    @AfterEach
+    public void deleteBoard() {
+        board.deleteBoard();
     }
 
     @Test
@@ -316,10 +322,13 @@ public class BoardTests {
 
     @Test
     public void testIsEnded() {
-        List<List<Integer>> matrix = board.getMat();
-        Integer old = matrix.get(0).set(5, 1);
+        for(int i = 0; i < board.getNCols(); i++) {
+            board.getMat().get(0).set(i, 1);
+        }
         board.movePieceNRows(30);
         assertEquals(true, board.isEnded());
+
+
     }
 
 }
