@@ -12,15 +12,10 @@ public class  Game  implements Observer {
     private Timer timer;
     private int score;
     private boolean isRuning;
-    private static final long timeInterval = 500;
+    private static final long timeInterval = 1500;
     public static int nRows = 20;
     public static int nCols = 10;
-    TimerTask tick = new TimerTask() {
-        @Override
-        public void run() {
-            board.movePieceDown();
-        }
-    };
+
 
     public Game() {
         controls = new Controls();
@@ -30,10 +25,8 @@ public class  Game  implements Observer {
         gameframe.addKeyListener(controls);
 
         score = 0;
-        isRuning = true;
-        timer = new Timer(true);
-
-        timer.scheduleAtFixedRate(tick, 0, timeInterval);
+        isRuning = false;
+        start();
     }
 
     public static void clearConsole()
@@ -62,12 +55,14 @@ public class  Game  implements Observer {
                 @Override
                 public void run() {
                     board.movePieceDown();
+                    board.deleteFullRows();
                 }
             };
             timer = new Timer(true);
             timer.scheduleAtFixedRate(tick, 0, timeInterval);
             isRuning = true;
         }
+        gameLoop();
     }
 
     public void stop() {
@@ -100,6 +95,7 @@ public class  Game  implements Observer {
                 break;
             case KeyEvent.VK_DOWN:
                 board.movePieceDown();
+                board.deleteFullRows();
                 break;
 
         }

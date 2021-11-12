@@ -16,14 +16,12 @@ public class Controls extends  Observable implements KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
-    System.out.println("key presss");
 
     int a=0;
   }
 
   @Override
   public void keyPressed(KeyEvent e) {
-   System.out.println("key presss");
     setChanged();
 
     notifyObservers(e);
@@ -31,7 +29,6 @@ public class Controls extends  Observable implements KeyListener {
 
   @Override
   public void keyReleased(KeyEvent e) {
-    System.out.println("key presss");
 
     int a=0;
   }

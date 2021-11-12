@@ -46,7 +46,7 @@ public class Board {
     }
 
     private Piece generateRandomPiece() {
-        GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
+        GenerateRandomNum rand = new GenerateRandomNum(); //TODO: mockObject
         nPieces++;
         switch (rand.getRandPieceNum()) {
             case 0:
@@ -264,6 +264,8 @@ public class Board {
             for (Integer integer : integers) {
                 if (integer == 1) {
                     out.append("  0");
+                } else {
+                    out.append("  ·");
                 }
             }
             out.append("\n");
