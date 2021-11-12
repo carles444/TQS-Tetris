@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class TetrisGameClient {
     private final String usersInfo = "usersInfo";
+    private String username;
+    private String password;
 
     private final String USER_FILE="./data/file.json";
     TetrisGameClient(){}
@@ -139,7 +141,5 @@ protected boolean isUserNameFormatCorrect(String userName){
         return true;
     }
 
-    public static void main(String[] args) {
-        Game game = new Game();
-    }
+
 }
