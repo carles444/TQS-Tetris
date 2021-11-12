@@ -112,6 +112,7 @@ public class Board {
             for(int[] pos : piece.getPositions()) {
                 matrix.get(pos[0]).set(pos[1], 1);
             }
+            deleteFullRows();
             piece = generateRandomPiece();
             if(!fitsBoard(piece.getPositions()))
                 ended = true;

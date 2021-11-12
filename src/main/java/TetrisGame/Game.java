@@ -12,12 +12,14 @@ public class  Game  implements Observer {
     private Timer timer;
     private int score;
     private boolean isRuning;
+    private boolean ended;
     private static final long timeInterval = 1500;
     public static int nRows = 20;
     public static int nCols = 10;
 
 
     public Game() {
+        ended = false;
         controls = new Controls();
         controls.addObserver(this);
         board = Board.getInstance();
@@ -26,7 +28,7 @@ public class  Game  implements Observer {
 
         score = 0;
         isRuning = false;
-        start();
+        startGameLoop();
     }
 
     public static void clearConsole()
@@ -49,13 +51,12 @@ public class  Game  implements Observer {
         }
     }
 
-    public void start() {
+    public void startGameLoop() {
         if(!isRuning) {
             TimerTask tick = new TimerTask() {
                 @Override
                 public void run() {
                     board.movePieceDown();
-                    board.deleteFullRows();
                 }
             };
             timer = new Timer(true);
@@ -63,6 +64,20 @@ public class  Game  implements Observer {
             isRuning = true;
         }
         gameLoop();
+    }
+
+    public void start() {
+        if(!isRuning) {
+            TimerTask tick = new TimerTask() {
+                @Override
+                public void run() {
+                    board.movePieceDown();
+                }
+            };
+            timer = new Timer(true);
+            timer.scheduleAtFixedRate(tick, 0, timeInterval);
+            isRuning = true;
+        }
     }
 
     public void stop() {
@@ -74,7 +89,7 @@ public class  Game  implements Observer {
     }
 
     public void gameLoop() {
-        while(isRuning && !board.isEnded()) {
+        while(!ended && !board.isEnded()) {
             clearConsole();
             System.out.println(board);
             score = board.getNCompletedRows() * 100;
@@ -82,7 +97,13 @@ public class  Game  implements Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-        KeyEvent e= (KeyEvent) arg;
+
+        KeyEvent e = (KeyEvent) arg;
+        if (!isRuning) {
+            if (e.getKeyCode() == KeyEvent.VK_SPACE)
+                start();
+            return;
+        }
         switch (e.getKeyCode()){
             case KeyEvent.VK_RIGHT:
                 board.movePieceRight();
@@ -95,14 +116,22 @@ public class  Game  implements Observer {
                 break;
             case KeyEvent.VK_DOWN:
                 board.movePieceDown();
-                board.deleteFullRows();
                 break;
-
+            case KeyEvent.VK_ESCAPE:
+                ended = true;
+                break;
+            case KeyEvent.VK_SPACE:
+                if (isRuning) {
+                    stop();
+                } else {
+                    start();
+                }
+                break;
         }
 
 
     }
-    public boolean gameEnd() { return board.isEnded(); }
+    public boolean gameEnd() { return ended; }
     public int getScore() { return score; }
     public Board getBoard() { return board; }
     public boolean isRunning() { return isRuning; }
