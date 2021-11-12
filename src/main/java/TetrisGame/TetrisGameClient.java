@@ -138,4 +138,8 @@ protected boolean isUserNameFormatCorrect(String userName){
 
         return true;
     }
+
+    public static void main(String[] args) {
+        Game game = new Game();
+    }
 }

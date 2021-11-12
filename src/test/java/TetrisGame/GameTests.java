@@ -16,7 +16,7 @@ public class GameTests {
     Game game;
     Board board;
 
-    public boolean equalPositions(int[][] pos1, int[][] pos2) {
+    public static boolean equalPositions(int[][] pos1, int[][] pos2) {
         for(int i = 0; i < Piece.pieceDim; i++) {
             if(pos1[i][0] != pos2[i][0] || pos1[i][1] != pos2[i][1])
                 return false;

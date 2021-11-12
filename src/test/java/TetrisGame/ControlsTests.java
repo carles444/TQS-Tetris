@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class ControlsTests {
   Controls controls;
@@ -19,31 +21,14 @@ public class ControlsTests {
 
   @Test
   public void presskey() throws AWTException {
-    Frame f = new Frame("Demo");
-    f.setLayout(new FlowLayout());
-    f.setSize(0, 0  );
-    Label l = new Label();
-    l.setText("This is a demonstration");
-    f.add(l);
-    f.setVisible(true);
 
     //Creating and adding the key listener
-
     game=new Game();
-
-    controls= new Controls();
-    controls.addObserver(game.getBoard());
-
-
-    f.addKeyListener(controls);
-
+    int[][] initPos = game.getBoard().getPiece().clonePositions();
     mockControls=new MockControls();
-    //game.start();
-    Robot roobot=new Robot();
-    roobot.keyPress(KeyEvent.VK_RIGHT);
-    //mockControls.pressKeyRight();
-
-
+    Robot robot =new Robot();
+    robot.keyPress(KeyEvent.VK_RIGHT);
+    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
 
   }
 

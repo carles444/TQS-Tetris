@@ -6,7 +6,7 @@ import java.lang.Math;
 
 import static TetrisGame.Piece.pieceDim;
 
-public class Board implements Observer {
+public class Board {
     public static final int N_PIECES = 7;
     private final List<List<Integer>> matrix;
     private Piece piece;
@@ -275,30 +275,5 @@ public class Board implements Observer {
     }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
-        KeyEvent e= (KeyEvent) arg;
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_RIGHT:
-                System.out.println("right");
-                break;
-            case KeyEvent.VK_LEFT:
-                System.out.println("left");
 
-                break;
-            case KeyEvent.VK_UP:
-                System.out.println("up");
-
-                break;
-            case KeyEvent.VK_DOWN:
-                System.out.println("dow");
-
-                break;
-
-
-
-        }
-
-
-    }
 }
