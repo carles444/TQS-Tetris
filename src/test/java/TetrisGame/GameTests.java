@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,8 +18,8 @@ public class GameTests {
     Board board;
 
     public static boolean equalPositions(int[][] pos1, int[][] pos2) {
-        for(int i = 0; i < Piece.pieceDim; i++) {
-            if(pos1[i][0] != pos2[i][0] || pos1[i][1] != pos2[i][1])
+        for (int i = 0; i < Piece.pieceDim; i++) {
+            if (pos1[i][0] != pos2[i][0] || pos1[i][1] != pos2[i][1])
                 return false;
         }
         return true;
@@ -28,18 +29,20 @@ public class GameTests {
     public void setUp() {
         game = new Game();
         board = Board.getInstance();
+        game.enableTesting();
     }
 
     @Test
     public void testConstructor() {
         assertEquals(0, game.getScore());
         assertNotNull(game.getBoard());
-        assertEquals(true, game.isRunning());
+        assertEquals(false, game.isRunning());
     }
 
     @Test
     public void testStartStop() throws InterruptedException {
         int[][] positions = board.getPiece().clonePositions();
+        game.start();
         Thread.sleep(1000);
         assertEquals(false, equalPositions(positions, board.getPiece().getPositions()));
         assertEquals(true, game.isRunning());
@@ -57,5 +60,12 @@ public class GameTests {
         assertEquals(true, game.isRunning());
 
 
+    }
+
+    @Test
+    public void testEndGame() {
+        board.getMat().get(0).set(5, 1);
+        board.movePieceNRows(30);
+        assertEquals(true, game.gameEnd());
     }
 }

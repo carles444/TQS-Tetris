@@ -11,14 +11,18 @@ public class  Game  implements Observer {
     private Board board;
     private Timer timer;
     private int score;
-    private boolean isRuning;
+    private boolean isRunning;
     private boolean ended;
+    private boolean gameLoop;
+    private boolean testing;
     private static final long timeInterval = 1500;
     public static int nRows = 20;
     public static int nCols = 10;
 
 
     public Game() {
+        testing = false;
+        gameLoop = false;
         ended = false;
         controls = new Controls();
         controls.addObserver(this);
@@ -27,8 +31,7 @@ public class  Game  implements Observer {
         gameframe.addKeyListener(controls);
 
         score = 0;
-        isRuning = false;
-        startGameLoop();
+        isRunning = false;
     }
 
     public static void clearConsole()
@@ -51,23 +54,9 @@ public class  Game  implements Observer {
         }
     }
 
-    public void startGameLoop() {
-        if(!isRuning) {
-            TimerTask tick = new TimerTask() {
-                @Override
-                public void run() {
-                    board.movePieceDown();
-                }
-            };
-            timer = new Timer(true);
-            timer.scheduleAtFixedRate(tick, 0, timeInterval);
-            isRuning = true;
-        }
-        gameLoop();
-    }
 
     public void start() {
-        if(!isRuning) {
+        if(!isRunning) {
             TimerTask tick = new TimerTask() {
                 @Override
                 public void run() {
@@ -76,32 +65,38 @@ public class  Game  implements Observer {
             };
             timer = new Timer(true);
             timer.scheduleAtFixedRate(tick, 0, timeInterval);
-            isRuning = true;
+            isRunning = true;
+        }
+        if(!gameLoop && !testing) {
+            gameLoop = true;
+            gameLoop();
         }
     }
 
     public void stop() {
-        if(isRuning) {
+        if(isRunning) {
             timer.cancel();
             timer = null;
-            isRuning = false;
+            isRunning = false;
         }
     }
 
     public void gameLoop() {
         while(!ended && !board.isEnded()) {
             clearConsole();
-            System.out.println(board);
+            System.out.println(this);
             score = board.getNCompletedRows() * 100;
         }
     }
+
     @Override
     public void update(Observable o, Object arg) {
-
         KeyEvent e = (KeyEvent) arg;
-        if (!isRuning) {
+        if (!isRunning) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE)
                 start();
+            else if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                ended = true;
             return;
         }
         switch (e.getKeyCode()){
@@ -121,19 +116,36 @@ public class  Game  implements Observer {
                 ended = true;
                 break;
             case KeyEvent.VK_SPACE:
-                if (isRuning) {
-                    stop();
-                } else {
-                    start();
-                }
+                stop();
                 break;
         }
 
 
     }
-    public boolean gameEnd() { return ended; }
+    public void enableTesting() { testing = true; }
+    public void disableTesting() { testing = false; }
+    public boolean gameEnd() { return ended || board.isEnded(); }
     public int getScore() { return score; }
     public Board getBoard() { return board; }
-    public boolean isRunning() { return isRuning; }
+    public boolean isRunning() { return isRunning; }
+    public Controls getControls() {
+        if(testing)
+            return controls;
+        else
+            return null;
+    }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+        out.append("            TETRIS GAME\n\n");
+        if(isRunning) {
+            out.append("Game Running\n");
+        } else {
+            out.append("Game Stopped\n");
+        }
+        out.append("Score: ").append(getScore()).append("\n\n");
+        out.append(board.toString());
+        return out.toString();
+    }
 
 }

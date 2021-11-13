@@ -12,18 +12,19 @@ public class PieceTests {
     public void setUp() {
         blueRicky = new BlueRicky(new int[]{0, 0});
     }
+
     @Test
     public void testMoveCol() {
         int[][] expectedPos = new int[][]{{0, 1}, {1, 1}, {1, 2}, {1, 3}};
         assertArrayEquals(blueRicky.moveCol(1), expectedPos);
 
-        expectedPos = new int[][]{{0, 3}, {1, 3}, {1, 4}, {1, 5}};
+        expectedPos = new int[][]{{0, 2}, {1, 2}, {1, 3}, {1, 4}};
         assertArrayEquals(blueRicky.moveCol(2), expectedPos);
 
-        expectedPos = new int[][]{{0, 2}, {1, 2}, {1, 3}, {1, 4}};
+        expectedPos = new int[][]{{0, -1}, {1, -1}, {1, 0}, {1, 1}};
         assertArrayEquals(blueRicky.moveCol(-1), expectedPos);
 
-        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        expectedPos = new int[][]{{0, -2}, {1, -2}, {1, -1}, {1, 0}};
         assertArrayEquals(blueRicky.moveCol(-2), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
@@ -36,13 +37,13 @@ public class PieceTests {
         int[][] expectedPos = new int[][]{{1, 0}, {2, 0}, {2, 1}, {2, 2}};
         assertArrayEquals(blueRicky.moveRow(1), expectedPos);
 
-        expectedPos = new int[][]{{3, 0}, {4, 0}, {4, 1}, {4, 2}};
+        expectedPos = new int[][]{{2, 0}, {3, 0}, {3, 1}, {3, 2}};
         assertArrayEquals(blueRicky.moveRow(2), expectedPos);
 
-        expectedPos = new int[][]{{2, 0}, {3, 0}, {3, 1}, {3, 2}};
+        expectedPos = new int[][]{{-1, 0}, {0, 0}, {0, 1}, {0, 2}};
         assertArrayEquals(blueRicky.moveRow(-1), expectedPos);
 
-        expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};
+        expectedPos = new int[][]{{-2, 0}, {-1, 0}, {-1, 1}, {-1, 2}};
         assertArrayEquals(blueRicky.moveRow(-2), expectedPos);
 
         expectedPos = new int[][]{{0, 0}, {1, 0}, {1, 1}, {1, 2}};

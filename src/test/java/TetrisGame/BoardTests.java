@@ -14,9 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTests {
     private Board board;
-    int nRows = 20;
-    int nCols = 10;
-    
+
     public boolean equalMatrix(List<List<Integer>> mat1, List<List<Integer>> mat2) {
         if(mat1.size() != mat2.size())
             return false;
@@ -33,8 +31,6 @@ public class BoardTests {
     
     @BeforeEach
     public void setUp() {
-        nRows = 20;
-        nCols = 10;
         board = Board.getInstance();
     }
 
@@ -42,6 +38,7 @@ public class BoardTests {
     public void deleteBoard() {
         board.deleteBoard();
     }
+
 
     @Test
     public void testTouchGroundAndPiece() {
@@ -78,6 +75,8 @@ public class BoardTests {
 
     @Test
     public void testBasicConstructor() {
+        int nRows = 20;
+        int nCols = 10;
         List<List<Integer>> expectedMat = new ArrayList<>();
         for(int i = 0; i < board.getNRows(); i++) {
             expectedMat.add(new ArrayList<Integer>());
@@ -142,28 +141,16 @@ public class BoardTests {
         board.movePieceNCols(5);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceNCols(100);
+        board.movePieceNCols(-100);
         assertEquals(true, pieceInBoard());
 
         board.movePieceNCols(0);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceNCols(1);
+        board.movePieceNCols(-1);
         assertEquals(true, pieceInBoard());
 
-        board.movePieceNCols(4);
-        assertEquals(true, pieceInBoard());
-
-        board.movePieceNRows(100);
-        assertEquals(true, pieceInBoard());
-
-        board.movePieceNRows(0);
-        assertEquals(true, pieceInBoard());
-
-        board.movePieceNRows(1);
-        assertEquals(true, pieceInBoard());
-
-        board.movePieceNRows(17);
+        board.movePieceNCols(-4);
         assertEquals(true, pieceInBoard());
 
         board.movePieceNRows(100);
@@ -176,6 +163,18 @@ public class BoardTests {
         assertEquals(true, pieceInBoard());
 
         board.movePieceNRows(17);
+        assertEquals(true, pieceInBoard());
+
+        board.movePieceNRows(-100);
+        assertEquals(true, pieceInBoard());
+
+        board.movePieceNRows(0);
+        assertEquals(true, pieceInBoard());
+
+        board.movePieceNRows(-1);
+        assertEquals(true, pieceInBoard());
+
+        board.movePieceNRows(-17);
         assertEquals(true, pieceInBoard());
     }
 
@@ -322,13 +321,9 @@ public class BoardTests {
 
     @Test
     public void testIsEnded() {
-        for(int i = 0; i < board.getNCols(); i++) {
-            board.getMat().get(0).set(i, 1);
-        }
+        board.getMat().get(0).set(5, 1);
         board.movePieceNRows(30);
         assertEquals(true, board.isEnded());
-
-
     }
 
 }

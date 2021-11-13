@@ -18,7 +18,6 @@ public class Board {
     static Board instance;
 
 
-    //TODO: method that checks if the piece touches ground or any piece going down
 
     private Board(int nRows, int nCols) {
         ended = false;
@@ -46,7 +45,7 @@ public class Board {
     }
 
     private Piece generateRandomPiece() {
-        GenerateRandomNum rand = new GenerateRandomNum(); //TODO: mockObject
+        GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
         nPieces++;
         switch (rand.getRandPieceNum()) {
             case 0:
@@ -177,7 +176,7 @@ public class Board {
             else if(positions[i][0] < 0) {
                 rowM = (-positions[i][0]);
             }
-            else if(positions[i][1] >= getNCols()) {
+            if(positions[i][1] >= getNCols()) {
                 colM = ((getNCols() - 1) - positions[i][1]);
             }
             else if(positions[i][1] < 0) {
@@ -271,8 +270,6 @@ public class Board {
             }
             out.append("\n");
         }
-
-
 
         return out.toString();
     }
