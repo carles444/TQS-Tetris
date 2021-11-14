@@ -35,7 +35,7 @@ public class Player {
         isOkeyFormat= puntuation<0?false:true;
         isOkeyFormat=!isOkeyFormat || puntuation>999999?false:true;
 
-        if (isOkeyFormat && isOkeyFormat){
+        if (isOkeyFormat ){
             ret=true;
             this.topScore=puntuation;
         }
