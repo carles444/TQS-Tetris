@@ -1,8 +1,7 @@
 package TetrisGame;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import com.sun.tools.javac.jvm.Gen;
+
 import java.util.*;
-import java.lang.Math;
 
 import static TetrisGame.Piece.pieceDim;
 
@@ -16,8 +15,23 @@ public class Board {
     private int nCompletedRows;
     private boolean ended;
     static Board instance;
+    GenerateRandomNum randNum;
 
+    private Board(int nRows, int nCols, GenerateRandomNum randObj) {
+        ended = false;
+        nPieces = 0;
+        nCompletedRows = 0;
+        matrix = new ArrayList<>();
+        for(int i = 0; i < nRows; i++) {
+            matrix.add(new ArrayList<Integer>());
+            for(int j = 0; j < nCols; j++) {
+                matrix.get(i).add(0);
+            }
+        }
+        randNum = randObj;
+        piece = generateRandomPiece();
 
+    }
 
     private Board(int nRows, int nCols) {
         ended = false;
@@ -30,8 +44,15 @@ public class Board {
                 matrix.get(i).add(0);
             }
         }
+        randNum = new GenerateRandomNum();
         piece = generateRandomPiece();
 
+    }
+
+    public static Board getInstance(GenerateRandomNum randObj) {
+        if(instance == null)
+            instance = new Board(20, 10, randObj);
+        return instance;
     }
 
     public static Board getInstance() {
@@ -45,9 +66,8 @@ public class Board {
     }
 
     private Piece generateRandomPiece() {
-        GenerateRandomNum rand = new MockGenerateRandomNum(); //TODO: mockObject
         nPieces++;
-        switch (rand.getRandPieceNum()) {
+        switch (randNum.getRandPieceNum()) {
             case 0:
                 return new OrangeRicky(new int[]{0, 5});
             case 1:

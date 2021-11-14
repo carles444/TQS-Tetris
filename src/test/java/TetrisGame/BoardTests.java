@@ -31,7 +31,7 @@ public class BoardTests {
     
     @BeforeEach
     public void setUp() {
-        board = Board.getInstance();
+        board = Board.getInstance(new MockGenerateRandomNum());
     }
 
     @AfterEach

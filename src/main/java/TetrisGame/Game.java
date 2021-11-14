@@ -1,5 +1,6 @@
 package TetrisGame;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,6 +9,7 @@ import java.util.TimerTask;
 
 public class  Game  implements Observer {
     private Controls controls;
+    gameFrame gameframe;
     private Board board;
     private Timer timer;
     private int score;
@@ -27,7 +29,7 @@ public class  Game  implements Observer {
         controls = new Controls();
         controls.addObserver(this);
         board = Board.getInstance();
-        gameFrame gameframe = new gameFrame();
+        gameframe = new gameFrame();
         gameframe.addKeyListener(controls);
 
         score = 0;
@@ -87,6 +89,7 @@ public class  Game  implements Observer {
             System.out.println(this);
             score = board.getNCompletedRows() * 100;
         }
+        gameframe.end();
     }
 
     @Override
@@ -95,8 +98,10 @@ public class  Game  implements Observer {
         if (!isRunning) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE)
                 start();
-            else if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+            else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                stop();
                 ended = true;
+            }
             return;
         }
         switch (e.getKeyCode()){
@@ -113,6 +118,7 @@ public class  Game  implements Observer {
                 board.movePieceDown();
                 break;
             case KeyEvent.VK_ESCAPE:
+                stop();
                 ended = true;
                 break;
             case KeyEvent.VK_SPACE:

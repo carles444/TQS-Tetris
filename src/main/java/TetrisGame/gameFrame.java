@@ -12,5 +12,8 @@ public class gameFrame extends Frame {
         setVisible(true);
 
     }
+    public void end() {
+        this.dispose();
+    }
 
 }
