@@ -33,6 +33,7 @@ public class Main {
 
         return tgC.registerUser(username, password);
     }
+
     public static boolean logIn() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
 
