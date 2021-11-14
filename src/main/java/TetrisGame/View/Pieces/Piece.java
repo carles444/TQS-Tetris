@@ -2,7 +2,7 @@ package TetrisGame.View.Pieces;
 
 public abstract class Piece {
     protected int[][] positions; //first position is the lowest row one
-    protected static int pieceDim = 4;
+    public static int pieceDim = 4;
 
     public static int getPieceDim() {
         return pieceDim;

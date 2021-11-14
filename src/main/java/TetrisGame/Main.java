@@ -17,9 +17,10 @@ public class Main {
 
 
 
-    public static void play() {
+    public static int play() {
         Game game = new Game();
         game.start();
+        return game.getScore();
     }
 
 
@@ -46,8 +47,8 @@ public class Main {
                     break;
                 case 3:
                     if(logged) {
-                        play();
-                        //Todo: guardar datos
+                        int score = play();
+                        tgC.savePuntuation(username, score);
                     }
                     break;
                 case 4:
