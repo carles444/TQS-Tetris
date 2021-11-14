@@ -1,6 +1,7 @@
 package TetrisGame.Model;
 
 
+import TetrisGame.Controller.Player;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -97,25 +98,25 @@ public class TetrisGameClient {
         2.1 Comprobamos si la puntuación actual es mayor a la anterior.
         2.2 Por ultimo guardamos los cambios.
      */
-    public boolean savePuntuation(String userName,int currentPuntution) throws IOException {
+    public boolean savePuntuation(Player player, int currentPuntution) throws IOException {
         //JSONObject jsonObject = MockGenerateJsonUsers.getJsonPuntuation();
         boolean isOkey=true;
         if (!isPuntuationFormatCorrect(currentPuntution)){
             return false;
         }
         if (notExistUsers(USER_PUNTUATION)){
-            writeJson(new JSONObject(),userName,String.valueOf(currentPuntution),USER_PUNTUATION);
+            writeJson(new JSONObject(),player.getName(),String.valueOf(currentPuntution),USER_PUNTUATION);
         }
         else{
             JSONObject jsonObject = readJson(USER_PUNTUATION);
             //JSONObject jsonObject=MockGenerateJsonUsers.getJsonUser();
 
-            if (userNotExist(jsonObject,userName)){
-                writeJson(new JSONObject(),userName,String.valueOf(currentPuntution),USER_PUNTUATION);
+            if (userNotExist(jsonObject,player.getName())){
+                writeJson(jsonObject,player.getName(),String.valueOf(currentPuntution),USER_PUNTUATION);
             }else{
-                int lastPuntuation=jsonObject.getInt(userName);
+                int lastPuntuation=jsonObject.getInt(player.getName());
                 if (lastPuntuation<currentPuntution){
-                    writeJson(jsonObject,userName,String.valueOf(currentPuntution),USER_PUNTUATION);
+                    writeJson(jsonObject,player.getName(),String.valueOf(currentPuntution),USER_PUNTUATION);
                 }
                 else{
                     isOkey=false;

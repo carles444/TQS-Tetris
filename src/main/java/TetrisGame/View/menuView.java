@@ -17,20 +17,25 @@ public class menuView {
     return sc.nextInt();
 
   }
-  public static String[] login(String username, String password) throws FileNotFoundException {
+  public static String[] login() throws FileNotFoundException {
     Scanner sc = new Scanner(System.in);
 
+
+  String username,password;
     System.out.println("Username: ");
-    username = sc.nextLine();
+    username=sc.nextLine();
     System.out.println("Password: ");
-    password = sc.nextLine();
+    password=sc.nextLine();
+
+
 
     return new String[]{username,password};
 
   }
-  public static String[]  signUp(String username, String password) throws IOException {
+  public static String[]  signUp() throws IOException {
     System.out.println("User must have 8 characters at most");
     Scanner sc = new Scanner(System.in);
+    String username,password;
 
     System.out.println("Username: ");
     username = sc.nextLine();

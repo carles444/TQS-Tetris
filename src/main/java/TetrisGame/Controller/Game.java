@@ -37,6 +37,7 @@ public class  Game  implements Observer {
         isRunning = false;
     }
 
+    /*
     public static void clearConsole()
     {
         try
@@ -57,7 +58,7 @@ public class  Game  implements Observer {
         }
     }
 
-
+    */
     public void start() {
         if(!isRunning) {
             TimerTask tick = new TimerTask() {
@@ -86,7 +87,7 @@ public class  Game  implements Observer {
 
     public void gameLoop() {
         while(!ended && !board.isEnded()) {
-            clearConsole();
+            //clearConsole();
             System.out.println(this);
             score = board.getNCompletedRows() * 100;
         }

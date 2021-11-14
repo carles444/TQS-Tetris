@@ -11,19 +11,18 @@ public class menuControl {
   public static int menu(){
     return menuView.menu();
   }
-  public static boolean login(String username, String password, TetrisGameClient tgC) throws FileNotFoundException {
+  public static boolean login(Player player,TetrisGameClient tgC) throws FileNotFoundException {
 
-    String[] words =menuView.login(username,password);
-    username=words[0];
-    password=words[1];
-    return tgC.login(username, password);
+    String[]words =menuView.login();
+    player.setName(words[0]);
+    return tgC.login(words[0], words[1]);
 
   }
-  public static boolean signUp(String username, String password, TetrisGameClient tgC) throws IOException {
-    String[] words =menuView.signUp(username,password);
-    username=words[0];
-    password=words[1];
-    return tgC.registerUser(username, password);
+  public static boolean signUp(Player player, TetrisGameClient tgC) throws IOException {
+    String[] words =menuView.signUp();
+    player.setName(words[0]);
+
+    return tgC.registerUser(words[0], words[1]);
   }
 
 

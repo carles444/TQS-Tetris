@@ -1,6 +1,7 @@
 package TetrisGame.CajaBlanca;
 
 
+import TetrisGame.Controller.Player;
 import TetrisGame.Model.TetrisGameClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -155,17 +156,17 @@ void puntuationFormatCorrect(){
     file.delete();}
 
     //camino 1 if->isPuntuationFormatIncorrect-> return false
-    assertEquals(false,tetrisGame.savePuntuation("Eustaqio",-34444444));
-    assertEquals(false,tetrisGame.savePuntuation("Estevan",1000000));
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Eustaqio"),-34444444));
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Estevan"),1000000));
 
     //camino 2 if->userNotExist->writeJson -> return true
-    assertEquals(true,tetrisGame.savePuntuation("Carlos",50000));
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),50000));
 
     //camino 3 if->userExist()-> currentPuntuation<lastPuntuation -> return true
-    assertEquals(false,tetrisGame.savePuntuation("Carlos",10000));
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Carlos"),10000));
 
     //camino 3 if->userExist()-> currentPuntuation>lastPuntuation -> return true
-    assertEquals(true,tetrisGame.savePuntuation("Carlos",60000));
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),60000));
 
 
   }

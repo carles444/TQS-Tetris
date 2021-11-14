@@ -1,6 +1,7 @@
 package TetrisGame;
 
 import TetrisGame.Controller.Game;
+import TetrisGame.Controller.Player;
 import TetrisGame.Controller.menuControl;
 import TetrisGame.Model.TetrisGameClient;
 
@@ -26,20 +27,21 @@ public class Main {
 
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         //Clip clip = soundMenu();
-
+        Player player=new Player();
+        StringBuilder[] words = new StringBuilder[2];
         tgC = new TetrisGameClient();
         boolean end = false;
         while(!end) {
             switch (menuControl.menu()) {
                 case 1:
-                    if (!menuControl.login(username,password,tgC)) {
+                    if (!menuControl.login(player,tgC)) {
                         System.out.println("Failed Login");
                     } else {
                         logged = true;
                     }
                     break;
                 case 2:
-                    if (!menuControl.signUp(username,password,tgC)) {
+                    if (!menuControl.signUp(player,tgC)) {
                         System.out.println("Failed signUp");
                     } else {
                         logged = true;
@@ -48,7 +50,7 @@ public class Main {
                 case 3:
                     if(logged) {
                         int score = play();
-                        tgC.savePuntuation(username, score);
+                        tgC.savePuntuation(player, score);
                     }
                     break;
                 case 4:

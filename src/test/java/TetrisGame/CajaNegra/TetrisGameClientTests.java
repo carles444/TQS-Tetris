@@ -1,5 +1,6 @@
 package TetrisGame.CajaNegra;
 
+import TetrisGame.Controller.Player;
 import TetrisGame.Model.TetrisGameClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -159,22 +160,22 @@ public class TetrisGameClientTests {
         file.delete();
 
 
-        assertEquals(true, tetrisGame.savePuntuation("Estevan",50000));
-        assertEquals(true ,tetrisGame.savePuntuation("Julian",50000));
-        assertEquals(true ,tetrisGame.savePuntuation("Aurelio",50000));
-        assertEquals(true ,tetrisGame.savePuntuation("Cristian",50000));
+        assertEquals(true, tetrisGame.savePuntuation(new Player("Estevan"),50000));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Julian"),50000));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Aurelio"),50000));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Cristian"),50000));
         //El valor actual no supera al anteriors
-        assertEquals(false, tetrisGame.savePuntuation("Estevan",100));
-        assertEquals(false ,tetrisGame.savePuntuation("Julian",100));
-        assertEquals(false ,tetrisGame.savePuntuation("Aurelio",100));
-        assertEquals(false ,tetrisGame.savePuntuation("Cristian",100));
+        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),100));
 
         //formatos erroneos
-        assertEquals(false, tetrisGame.savePuntuation("Estevan",-34444444));
-        assertEquals(false ,tetrisGame.savePuntuation("Julian",-5));
-        assertEquals(false ,tetrisGame.savePuntuation("Aurelio",-1));
-        assertEquals(false ,tetrisGame.savePuntuation("Cristian",1000000));
-        assertEquals(false ,tetrisGame.savePuntuation("Cristian",2000000));
+        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),-34444444));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),-5));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),-1));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),1000000));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),2000000));
 
 
 
