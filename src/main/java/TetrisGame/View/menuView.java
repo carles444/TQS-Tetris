@@ -8,11 +8,14 @@ import java.util.Scanner;
 
 public class menuView {
   public static int menu(){
-    System.out.println("Tetris Game\n");
-    System.out.println(ConsoleColors.RED+ "1. LogIn"+ConsoleColors.RESET);
-    System.out.println(ConsoleColors.RED_BACKGROUND_BRIGHT+ "2. SignUp"+ConsoleColors.RESET);
-    System.out.println("3. Play");
-    System.out.println("4. Exit");
+
+    System.out.println(ConsoleColors.RED_UNDERLINED+ "Tetris Game "+ConsoleColors.RESET);
+    System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+ "1. LogIn"+ConsoleColors.RESET);
+    System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT+ "2. SignUp"+ConsoleColors.RESET);
+    System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT+ "3. Play"+ConsoleColors.RESET);
+    System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT+ "4. Exit"+ConsoleColors.RESET);
+
+
     Scanner sc = new Scanner(System.in);
     return sc.nextInt();
 
@@ -22,9 +25,9 @@ public class menuView {
 
 
   String username,password;
-    System.out.println("Username: ");
+    System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT+ "Username: "+ConsoleColors.RESET);
     username=sc.nextLine();
-    System.out.println("Password: ");
+    System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT+"Password: "+ConsoleColors.RESET);
     password=sc.nextLine();
 
 
@@ -33,15 +36,15 @@ public class menuView {
 
   }
   public static String[]  signUp() throws IOException {
-    System.out.println("User must have 8 characters at most");
+    System.out.println(ConsoleColors.RED_BOLD_BRIGHT+ "User must have 8 characters at most"+ConsoleColors.RESET);
     Scanner sc = new Scanner(System.in);
     String username,password;
 
-    System.out.println("Username: ");
+    System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT+ "Username: "+ConsoleColors.RESET);
     username = sc.nextLine();
-    System.out.println("Password must have lowercase, uppercase, numbers and special characters(8 chars)");
+    System.out.println(ConsoleColors.RED_BOLD_BRIGHT+"Password must have lowercase, uppercase, numbers and special characters(8 chars)"+ConsoleColors.RESET);
 
-    System.out.println("Password: ");
+    System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT+"Password: "+ConsoleColors.RESET);
     password = sc.nextLine();
 
     return new String[]{username,password};

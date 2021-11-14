@@ -5,9 +5,14 @@ import TetrisGame.Mock.MockGenerateRandomNum;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -298,7 +303,7 @@ public class BoardTests {
     }
 
     @Test
-    public void testDeleteFullRows() {
+    public void testDeleteFullRows() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         List<List<Integer>> expectedMat = new ArrayList<>();
         for(int i = 0; i < board.getNRows(); i++) {
             expectedMat.add(new ArrayList<Integer>());

@@ -2,7 +2,10 @@ package TetrisGame.Controller;
 
 import TetrisGame.View.Board;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -10,7 +13,7 @@ import java.util.TimerTask;
 
 public class  Game  implements Observer {
     private Controls controls;
-    gameFrame gameframe;
+    GameFrame gameframe;
     private Board board;
     private Timer timer;
     private int score;
@@ -30,41 +33,53 @@ public class  Game  implements Observer {
         controls = new Controls();
         controls.addObserver(this);
         board = Board.getInstance();
-        gameframe = new gameFrame();
+        gameframe = new GameFrame();
         gameframe.addKeyListener(controls);
 
         score = 0;
         isRunning = false;
     }
 
-    /*
-    public static void clearConsole()
-    {
-        try
-        {
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows"))
-            {
-                Runtime.getRuntime().exec("cls");
-            }
-            else
-            {
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (final Exception e)
-        {
-            e.printStackTrace();
-        }
+    public Controls getCojtrols() {
+        return controls;
     }
 
-    */
+    /*
+        public static void clearConsole()
+        {
+            try
+            {
+                final String os = System.getProperty("os.name");
+                if (os.contains("Windows"))
+                {
+                    Runtime.getRuntime().exec("cls");
+                }
+                else
+                {
+                    Runtime.getRuntime().exec("clear");
+                }
+            }
+            catch (final Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        */
     public void start() {
         if(!isRunning) {
             TimerTask tick = new TimerTask() {
                 @Override
                 public void run() {
-                    board.movePieceDown();
+                    try {
+                        board.movePieceDown();
+                    } catch (UnsupportedAudioFileException e) {
+                        e.printStackTrace();
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             };
             timer = new Timer(true);
@@ -117,7 +132,15 @@ public class  Game  implements Observer {
                 board.rotatePieceLeft();
                 break;
             case KeyEvent.VK_DOWN:
-                board.movePieceDown();
+                try {
+                    board.movePieceDown();
+                } catch (UnsupportedAudioFileException ex) {
+                    ex.printStackTrace();
+                } catch (LineUnavailableException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 break;
             case KeyEvent.VK_ESCAPE:
                 stop();

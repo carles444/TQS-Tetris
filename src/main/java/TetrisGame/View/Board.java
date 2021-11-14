@@ -2,7 +2,10 @@ package TetrisGame.View;
 
 import TetrisGame.View.Pieces.*;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
 
 public class Board {
     public static final int N_PIECES = 7;
@@ -127,6 +130,7 @@ public class Board {
             return true;
         }
         else { //piece touches ground and generates new piece
+
             for(int[] pos : piece.getPositions()) {
                 matrix.get(pos[0]).set(pos[1], 1);
             }
@@ -249,6 +253,7 @@ public class Board {
                 }
             }
             if(full) {
+
                 deleteRow(i);
                 nCompletedRows++;
             }
@@ -289,7 +294,9 @@ public class Board {
             }
             out.append("\n");
         }
-
+        BufferedImage image = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = image.createGraphics();
+        graphics2D.drawString(String.valueOf(out),10,10);
         return out.toString();
     }
 

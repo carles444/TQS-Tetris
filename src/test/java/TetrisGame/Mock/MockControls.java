@@ -11,7 +11,27 @@ public class MockControls {
   }
 
   public void pressKeyRight(){
-    roobot.keyPress(KeyEvent.VK_RIGHT);
+    Thread t = new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+        }
+        // try catch for forcing Escape key press
+        try {
+          Robot robObject = new Robot();
+          robObject.keyPress(KeyEvent.VK_RIGHT);
+        } catch (AWTException e1) {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+
+      }
+    });
+
+
+
   }
   public void pressKeyLeft(){
     roobot.keyPress(KeyEvent.VK_LEFT);

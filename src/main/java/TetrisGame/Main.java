@@ -2,11 +2,11 @@ package TetrisGame;
 
 import TetrisGame.Controller.Game;
 import TetrisGame.Controller.Player;
-import TetrisGame.Controller.menuControl;
+import TetrisGame.Controller.MenuControl;
 import TetrisGame.Model.TetrisGameClient;
+import TetrisGame.View.Sound;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -31,24 +31,29 @@ public class Main {
         StringBuilder[] words = new StringBuilder[2];
         tgC = new TetrisGameClient();
         boolean end = false;
+        Sound.startSoundMenu();
+
         while(!end) {
-            switch (menuControl.menu()) {
+            switch (MenuControl.menu()) {
                 case 1:
-                    if (!menuControl.login(player,tgC)) {
+                    if (!MenuControl.login(player,tgC)) {
                         System.out.println("Failed Login");
                     } else {
                         logged = true;
                     }
                     break;
                 case 2:
-                    if (!menuControl.signUp(player,tgC)) {
+                    if (!MenuControl.signUp(player,tgC)) {
                         System.out.println("Failed signUp");
                     } else {
                         logged = true;
                     }
                     break;
                 case 3:
+
                     if(logged) {
+                        Sound.stop();
+                        Sound.startSoundGame();
                         int score = play();
                         tgC.savePuntuation(player, score);
                     }

@@ -5,11 +5,36 @@ import java.io.File;
 import java.io.IOException;
 
 public class Sound {
-  public static Clip soundMenu() throws LineUnavailableException, IOException, UnsupportedAudioFileException, UnsupportedAudioFileException {
-    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("./data/sounds/soundtrack.wav"));
-    Clip clip = AudioSystem.getClip();
+  private static Clip clip;
+  public static void stop(){
+    clip.stop();
+  }
+  public static Clip startSoundMenu() throws LineUnavailableException, IOException, UnsupportedAudioFileException, UnsupportedAudioFileException {
+    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("./data/sounds/menu.wav"));
+    clip = AudioSystem.getClip();
     clip.open(inputStream);
     clip.loop(Clip.LOOP_CONTINUOUSLY);
+    clip.start();
+    return clip;
+  }
+
+  public static Clip startSoundGame() throws LineUnavailableException, IOException, UnsupportedAudioFileException, UnsupportedAudioFileException {
+    clip.stop();
+
+    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("./data/sounds/soundTrack.wav"));
+    clip = AudioSystem.getClip();
+    clip.open(inputStream);
+    clip.loop(Clip.LOOP_CONTINUOUSLY);
+    clip.start();
+    return clip;
+  }
+  public static Clip sounLineEfect() throws LineUnavailableException, IOException, UnsupportedAudioFileException, UnsupportedAudioFileException {
+
+
+    AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("./data/sounds/line.wav"));
+    clip = AudioSystem.getClip();
+    clip.open(inputStream);
+    clip.start();
     return clip;
   }
 }

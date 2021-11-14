@@ -12,32 +12,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ControlsTests {
-  Controls controls;
   Game game;
-  MockControls mockControls;
   @BeforeEach
   void setUp() throws AWTException {
     //controls= Controls.getInstance();
     game=new Game();
-    mockControls=new MockControls();
   }
 
   @Test
-  public void presskey() throws AWTException {
+  public void presskey() throws AWTException, InterruptedException {
+    Controls controls=new Controls();
+    MockControls mockControls=new MockControls();;
 
     //Creating and adding the key listener
     game=new Game();
     int[][] initPos = game.getBoard().getPiece().clonePositions();
-    mockControls=new MockControls();
-    mockControls.pressKeyRight();
-    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+
+    game.getCojtrols().pressKeyRight();
+    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
     mockControls.pressKeyLeft();
 
-    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
     mockControls.pressKeyUp();
-    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
     mockControls.pressKeyDown();
-    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
   }
 
 
