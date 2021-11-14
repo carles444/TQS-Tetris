@@ -1,7 +1,7 @@
 package TetrisGame.CajaBlanca;
 
 
-import TetrisGame.TetrisGameClient;
+import TetrisGame.Model.TetrisGameClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
