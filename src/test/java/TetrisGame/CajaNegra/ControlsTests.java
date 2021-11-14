@@ -29,26 +29,17 @@ public class ControlsTests {
     game=new Game();
     int[][] initPos = game.getBoard().getPiece().clonePositions();
     mockControls=new MockControls();
-    Robot robot =new Robot();
-    robot.keyPress(KeyEvent.VK_RIGHT);
-    assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    mockControls.pressKeyRight();
+    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    mockControls.pressKeyLeft();
 
+    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    mockControls.pressKeyUp();
+    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
+    mockControls.pressKeyDown();
+    assertEquals(true, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
   }
 
-  public static void main(String[] args)
-  {
-    //Setting the frame and labels
-    Frame f = new Frame("Demo");
-    f.setLayout(new FlowLayout());
-    f.setSize(200, 200);
-    Label l = new Label();
-    l.setText("This is a Game");
-    f.add(l);
-    f.setVisible(true);
 
-    //Creating and adding the key listener
-    //Controls k =Controls.getInstance();
-    //f.addKeyListener(k);
-  }
 
 }

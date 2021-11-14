@@ -1,4 +1,4 @@
-package TetrisGame.CajaNegra;
+package TetrisGame.CajaNegra.Pieces;
 
 import TetrisGame.View.Pieces.BlueRicky;
 import TetrisGame.View.Pieces.Piece;

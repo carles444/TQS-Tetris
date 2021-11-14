@@ -2,6 +2,7 @@ package TetrisGame.CajaBlanca;
 
 
 import TetrisGame.Controller.Player;
+import TetrisGame.Mock.MockGenerateJsonUsers;
 import TetrisGame.Model.TetrisGameClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -136,15 +137,23 @@ void puntuationFormatCorrect(){
 
   }
   @Test
-  void login() throws FileNotFoundException {
-    //camino 1 if->userIncorrect()-> return false
+  void login() throws IOException {
+    File file= new File(tetrisGame.getUSER_FILE());
+    if (file.exists()){
+      file.delete();}
+
+    //camino 1 if->notExistUsersJsonFile-> return false
     assertEquals(false,tetrisGame.login("Eustaqio","1eG$5dg@"));
+    MockGenerateJsonUsers.generateJsonUsers();
+
+    //camino 1 if->userIncorrect()-> return false
+    assertEquals(false,tetrisGame.login("Carlos","1eG$5dg@"));
 
     //camino 2 if->userCorrect()->but password incorrect -> return false
     assertEquals(false,tetrisGame.login("Estevan","2eG$5dg@"));
 
     //camino 3 if->userCorrect()-> password correct -> return true
-    assertEquals(false,tetrisGame.login("Estevan","1eG$5dg@"));
+    assertEquals(true,tetrisGame.login("Estevan","1eG$5dgg"));
 
 
   }
@@ -159,13 +168,16 @@ void puntuationFormatCorrect(){
     assertEquals(false,tetrisGame.savePuntuation(new Player("Eustaqio"),-34444444));
     assertEquals(false,tetrisGame.savePuntuation(new Player("Estevan"),1000000));
 
-    //camino 2 if->userNotExist->writeJson -> return true
+    //camino 2 if->notExistUsersJsonFile->writeJson -> return true
     assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),50000));
 
-    //camino 3 if->userExist()-> currentPuntuation<lastPuntuation -> return true
+    //camino 3 if->notExistUsersJsonFile->userNotExist ->writeJson-> return true
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Estevan"),50000));
+
+    //camino 4 if->existUsersJsonFile()->userExist -> currentPuntuation<lastPuntuation -> return false
     assertEquals(false,tetrisGame.savePuntuation(new Player("Carlos"),10000));
 
-    //camino 3 if->userExist()-> currentPuntuation>lastPuntuation -> return true
+    //camino 5 if->userExist()-> currentPuntuation>lastPuntuation -> return true
     assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),60000));
 
 

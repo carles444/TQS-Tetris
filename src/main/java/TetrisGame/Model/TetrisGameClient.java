@@ -12,16 +12,16 @@ import java.io.*;
 public class TetrisGameClient {
 
 
-    private final String USER_FILE="./data/file.json";
-    private final String USER_PUNTUATION="./data/puntuation.json";
+    private static final String USER_FILE="./data/file.json";
+    private static final String USER_PUNTUATION="./data/puntuation.json";
 
     public TetrisGameClient(){}
 
-    public String getUSER_FILE() {
+    public static String getUSER_FILE() {
         return USER_FILE;
     }
 
-    public String getUSER_PUNTUATION() {
+    public static String getUSER_PUNTUATION() {
         return USER_PUNTUATION;
     }
 
@@ -75,7 +75,7 @@ public class TetrisGameClient {
      */
     public boolean login(String userName, String password) throws FileNotFoundException {
 
-        if (notExistUsers(USER_FILE)){
+        if (notExistUsersJsonFile(USER_FILE)){
             return false;
         }
         JSONObject jsonObject = readJson(USER_FILE);
@@ -104,7 +104,7 @@ public class TetrisGameClient {
         if (!isPuntuationFormatCorrect(currentPuntution)){
             return false;
         }
-        if (notExistUsers(USER_PUNTUATION)){
+        if (notExistUsersJsonFile(USER_PUNTUATION)){
             writeJson(new JSONObject(),player.getName(),String.valueOf(currentPuntution),USER_PUNTUATION);
         }
         else{
@@ -136,7 +136,7 @@ public class TetrisGameClient {
     private boolean passwordIsCorrect(String passwordTemp1,String passwordTemp2 ){
         return passwordTemp1.equals(passwordTemp2);
     }
-    private boolean notExistUsers( String path){
+    private boolean notExistUsersJsonFile( String path){
         File targetFile = new File(path);
         return  !targetFile.exists() || targetFile.length()==0;
     }
