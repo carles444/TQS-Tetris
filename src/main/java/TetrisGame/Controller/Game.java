@@ -2,10 +2,7 @@ package TetrisGame.Controller;
 
 import TetrisGame.View.Board;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -71,15 +68,7 @@ public class  Game  implements Observer {
             TimerTask tick = new TimerTask() {
                 @Override
                 public void run() {
-                    try {
-                        board.movePieceDown();
-                    } catch (UnsupportedAudioFileException e) {
-                        e.printStackTrace();
-                    } catch (LineUnavailableException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    board.movePieceDown();
                 }
             };
             timer = new Timer(true);
@@ -132,15 +121,7 @@ public class  Game  implements Observer {
                 board.rotatePieceLeft();
                 break;
             case KeyEvent.VK_DOWN:
-                try {
-                    board.movePieceDown();
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                board.movePieceDown();
                 break;
             case KeyEvent.VK_ESCAPE:
                 stop();
