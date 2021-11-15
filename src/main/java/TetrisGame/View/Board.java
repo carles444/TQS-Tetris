@@ -1,6 +1,7 @@
 package TetrisGame.View;
 
 import TetrisGame.View.Pieces.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -67,7 +68,7 @@ public class Board {
         instance = null;
     }
 
-    private Piece generateRandomPiece() {
+    public Piece generateRandomPiece() {
         nPieces++;
         switch (randNum.getRandPieceNum()) {
             case 0:
@@ -84,10 +85,8 @@ public class Board {
                 return new Teewee(new int[]{0, 5});
             case 6:
                 return new Smashboy(new int[]{0, 5});
-            default:
-                nPieces--;
-                return null;
         }
+        return null;
     }
 
 

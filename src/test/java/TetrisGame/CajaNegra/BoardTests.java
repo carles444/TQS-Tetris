@@ -2,6 +2,7 @@ package TetrisGame.CajaNegra;
 
 import TetrisGame.View.Board;
 import TetrisGame.Mock.MockGenerateRandomNum;
+import TetrisGame.View.Pieces.Piece;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,19 @@ public class BoardTests {
         board.deleteBoard();
     }
 
+    @Test
+    public void testToString() {
+        System.out.println(board);
+    }
+
+    @Test
+    public void testGenerateRandomPiece() {
+        board.deleteBoard();
+        board = Board.getInstance();
+        for(int i = 0; i < 100; i++)
+            assertNotNull(board.generateRandomPiece());
+
+    }
 
     @Test
     public void testTouchGroundAndPiece() {
