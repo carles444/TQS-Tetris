@@ -1,5 +1,6 @@
 package TetrisGame.CajaNegra;
 
+import TetrisGame.Mock.MockGenerateRandomNum;
 import TetrisGame.View.Board;
 import TetrisGame.Controller.Game;
 import TetrisGame.View.Pieces.Piece;
@@ -25,8 +26,8 @@ public class GameTests {
 
     @BeforeEach
     public void setUp() {
+        board = Board.getInstance(new MockGenerateRandomNum());
         game = new Game();
-        board = Board.getInstance();
         game.enableTesting();
     }
 

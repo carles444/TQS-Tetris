@@ -1,5 +1,6 @@
 package TetrisGame.CajaNegra.Pieces;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import TetrisGame.View.Pieces.Piece;
 import TetrisGame.View.Pieces.RhodeIslandZ;
@@ -15,6 +16,8 @@ public class RhodeIslandTests {
     public void testGetPositions() {
         int[][] expectedPos = new int[][]{{0, 0}, {0, -1}, {1, -1}, {1, -2}};
         assertArrayEquals(rislandz.getPositions(), expectedPos);
+        assertEquals("RhodeIslandZ", rislandz.getName());
+
     }
 
     @Test

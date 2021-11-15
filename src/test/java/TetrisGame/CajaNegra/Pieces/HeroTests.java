@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HeroTests {
     Piece hero;
@@ -18,6 +19,8 @@ public class HeroTests {
     public void testGetPositions() {
         int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
         assertArrayEquals(hero.getPositions(), expectedPos);
+        assertEquals("Hero", hero.getName());
+
     }
 
     @Test
@@ -33,10 +36,10 @@ public class HeroTests {
     @Test
     public void testRotateLeftHero() {
         int[][] expectedPos = new int[][]{{-3, 2}, {-2, 2}, {-1, 2}, {0, 2}};
-        assertArrayEquals(hero.rotateRight(), expectedPos);
+        assertArrayEquals(hero.rotateLeft(), expectedPos);
         hero.setPositions(hero.rotateLeft());
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {0, 2}, {0, 3}};
-        assertArrayEquals(hero.rotateRight(), expectedPos);
+        assertArrayEquals(hero.rotateLeft(), expectedPos);
     }
 }

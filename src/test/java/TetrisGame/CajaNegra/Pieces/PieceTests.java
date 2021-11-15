@@ -16,6 +16,15 @@ public class PieceTests {
     }
 
     @Test
+    public void testClonePositions() {
+        assertArrayEquals(blueRicky.clonePositions(), blueRicky.getPositions());
+    }
+
+    @Test
+    public void testGetPieceDim() {
+        assertEquals(4, Piece.getPieceDim());
+    }
+    @Test
     public void testMoveCol() {
         int[][] expectedPos = new int[][]{{0, 1}, {1, 1}, {1, 2}, {1, 3}};
         assertArrayEquals(blueRicky.moveCol(1), expectedPos);

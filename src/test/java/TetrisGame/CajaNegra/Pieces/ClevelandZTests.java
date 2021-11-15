@@ -1,5 +1,6 @@
 package TetrisGame.CajaNegra.Pieces;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import TetrisGame.View.Pieces.ClevelandZ;
 import TetrisGame.View.Pieces.Piece;
@@ -17,6 +18,8 @@ public class ClevelandZTests {
     public void testGetPositions() {
         int[][] expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
         assertArrayEquals(clevelandz.getPositions(), expectedPos);
+        assertEquals("ClevelandZ", clevelandz.getName());
+
     }
 
     @Test
@@ -33,10 +36,10 @@ public class ClevelandZTests {
     @Test
     public void testRotateLeftClevelandZ() {
         int[][] expectedPos = new int[][]{{-1, 2}, {0, 2}, {0, 1}, {1, 1}};
-        assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+        assertArrayEquals(clevelandz.rotateLeft(), expectedPos);
         clevelandz.setPositions(clevelandz.rotateLeft());
 
         expectedPos = new int[][]{{0, 0}, {0, 1}, {1, 1}, {1, 2}};
-        assertArrayEquals(clevelandz.rotateRight(), expectedPos);
+        assertArrayEquals(clevelandz.rotateLeft(), expectedPos);
     }
 }
