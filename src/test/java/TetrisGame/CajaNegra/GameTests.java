@@ -62,19 +62,19 @@ public class GameTests {
     public void testStartStop() throws InterruptedException {
         int[][] positions = board.getPiece().clonePositions();
         game.start();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         assertEquals(false, equalPositions(positions, board.getPiece().getPositions()));
         assertEquals(true, game.isRunning());
 
         game.stop();
         positions = board.getPiece().clonePositions();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         assertEquals(true, equalPositions(positions, board.getPiece().getPositions()));
         assertEquals(false, game.isRunning());
 
         positions = board.getPiece().clonePositions();
         game.start();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         assertEquals(false, equalPositions(positions, board.getPiece().getPositions()));
         assertEquals(true, game.isRunning());
 
@@ -83,6 +83,7 @@ public class GameTests {
 
     @Test
     public void testEndGame() {
+        assertEquals(false, game.gameEnd());
         board.getMat().get(0).set(5, 1);
         board.movePieceNRows(30);
         assertEquals(true, game.gameEnd());

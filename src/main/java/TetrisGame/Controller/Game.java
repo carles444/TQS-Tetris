@@ -9,7 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class  Game  implements Observer {
-    private Controls controls;
+    private final Controls controls;
     GameFrame gameframe;
     private Board board;
     private Timer timer;
