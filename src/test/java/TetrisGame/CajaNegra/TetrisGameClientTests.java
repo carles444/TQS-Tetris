@@ -13,6 +13,9 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/*
+
+ */
 public class TetrisGameClientTests {
 
     TetrisGameClient tetrisGame;
@@ -20,6 +23,77 @@ public class TetrisGameClientTests {
     @BeforeEach
     void setUp() {
         tetrisGame = new TetrisGameClient();
+    }
+
+    @Test
+    void registerUser() throws IOException {
+        File file= new File(tetrisGame.getUSER_FILE());
+        file.delete();
+        assertEquals(true, tetrisGame.registerUser("Carlos","1eG$5dg@"));
+        assertEquals(true ,tetrisGame.registerUser("Ivan","2fG$6dg@"));
+        assertEquals(true ,tetrisGame.registerUser("David","3gG$7dg@"));
+        assertEquals(true ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
+
+        assertEquals(false, tetrisGame.registerUser("Carlos","1eG$5dg@"));
+        assertEquals(false ,tetrisGame.registerUser("Ivan","2fG$6dg@"));
+        assertEquals(false ,tetrisGame.registerUser("David","3gG$7dg@"));
+        assertEquals(false ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
+
+
+    }
+    @Test
+    void login() throws IOException {
+        File file= new File(tetrisGame.getUSER_FILE());
+        file.delete();
+        //file not exist
+        assertEquals(false, tetrisGame.login("Carlos","0aA$5dg@"));
+        assertEquals(false ,tetrisGame.login("Ivan","0aA$6dg@"));
+        assertEquals(false ,tetrisGame.login("David","0aA$7dg@"));
+        assertEquals(false ,tetrisGame.login("Miguel","0aA$8dg@"));
+        //correct tests
+        MockGenerateJsonUsers.generateJsonUsers();
+        assertEquals(true, tetrisGame.login("Estevan","1eG$5dgg"));
+        assertEquals(true ,tetrisGame.login("Julian","2fG$6dg@"));
+        assertEquals(true ,tetrisGame.login("Aurelio","3gG$7dg@"));
+        assertEquals(true ,tetrisGame.login("Cristian","4hG$8dg@"));
+        //usuario incorrecta
+        assertEquals(false, tetrisGame.login("Maria","1eG$5dg@"));
+        assertEquals(false ,tetrisGame.login("Carmen","2fG$6dg@"));
+        assertEquals(false ,tetrisGame.login("Andrea","3gG$7dg@"));
+        assertEquals(false ,tetrisGame.login("Estela","4hG$8dg@"));
+        //contraseña incorrecta
+        assertEquals(false, tetrisGame.login("Estevan","0aA$5dg@"));
+        assertEquals(false ,tetrisGame.login("Julian","0aA$6dg@"));
+        assertEquals(false ,tetrisGame.login("Aurelio","0aA$7dg@"));
+        assertEquals(false ,tetrisGame.login("Cristian","0aA$8dg@"));
+
+    }
+    @Test
+    void savePuntuation() throws IOException {
+        File file= new File(tetrisGame.getUSER_PUNTUATION());
+        file.delete();
+
+        MockGenerateJsonUsers.generateJsonPuntuation();
+        //correctos
+        assertEquals(true, tetrisGame.savePuntuation(new Player("Estevan"),999999));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Julian"),999998));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Aurelio"),500000));
+        assertEquals(true ,tetrisGame.savePuntuation(new Player("Cristian"),50000));
+        //El valor actual no supera al anteriors
+        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),100));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),100));
+
+        //formatos erroneos de las puntuaciones
+        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),-34444444));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),-5));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),-1));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),1000000));
+        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),2000000));
+
+
+
     }
     // El nombre de usuario solo puede contener hasta 8 letras
     @Test
@@ -121,76 +195,5 @@ public class TetrisGameClientTests {
         assertEquals(false, tetrisGame.isPuntuationFormatCorrect(2000000));
 
     }
-    @Test
-    void registerUser() throws IOException {
-        File file= new File(tetrisGame.getUSER_FILE());
-        file.delete();
-        assertEquals(true, tetrisGame.registerUser("Carlos","1eG$5dg@"));
-        assertEquals(true ,tetrisGame.registerUser("Ivan","2fG$6dg@"));
-        assertEquals(true ,tetrisGame.registerUser("David","3gG$7dg@"));
-        assertEquals(true ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
-
-        assertEquals(false, tetrisGame.registerUser("Carlos","1eG$5dg@"));
-        assertEquals(false ,tetrisGame.registerUser("Ivan","2fG$6dg@"));
-        assertEquals(false ,tetrisGame.registerUser("David","3gG$7dg@"));
-        assertEquals(false ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
-
-
-    }
-    @Test
-    void login() throws IOException {
-        File file= new File(tetrisGame.getUSER_FILE());
-        file.delete();
-        //file not exist
-        assertEquals(false, tetrisGame.login("Carlos","0aA$5dg@"));
-        assertEquals(false ,tetrisGame.login("Ivan","0aA$6dg@"));
-        assertEquals(false ,tetrisGame.login("David","0aA$7dg@"));
-        assertEquals(false ,tetrisGame.login("Miguel","0aA$8dg@"));
-        //correct tests
-        MockGenerateJsonUsers.generateJsonUsers();
-        assertEquals(true, tetrisGame.login("Estevan","1eG$5dgg"));
-        assertEquals(true ,tetrisGame.login("Julian","2fG$6dg@"));
-        assertEquals(true ,tetrisGame.login("Aurelio","3gG$7dg@"));
-        assertEquals(true ,tetrisGame.login("Cristian","4hG$8dg@"));
-        //usuario incorrecta
-        assertEquals(false, tetrisGame.login("Maria","1eG$5dg@"));
-        assertEquals(false ,tetrisGame.login("Carmen","2fG$6dg@"));
-        assertEquals(false ,tetrisGame.login("Andrea","3gG$7dg@"));
-        assertEquals(false ,tetrisGame.login("Estela","4hG$8dg@"));
-        //contraseña incorrecta
-        assertEquals(false, tetrisGame.login("Estevan","0aA$5dg@"));
-        assertEquals(false ,tetrisGame.login("Julian","0aA$6dg@"));
-        assertEquals(false ,tetrisGame.login("Aurelio","0aA$7dg@"));
-        assertEquals(false ,tetrisGame.login("Cristian","0aA$8dg@"));
-
-    }
-    @Test
-    void savePuntuation() throws IOException {
-        File file= new File(tetrisGame.getUSER_PUNTUATION());
-        file.delete();
-
-        MockGenerateJsonUsers.generateJsonPuntuation();
-        //correctos
-        assertEquals(true, tetrisGame.savePuntuation(new Player("Estevan"),999999));
-        assertEquals(true ,tetrisGame.savePuntuation(new Player("Julian"),999998));
-        assertEquals(true ,tetrisGame.savePuntuation(new Player("Aurelio"),500000));
-        assertEquals(true ,tetrisGame.savePuntuation(new Player("Cristian"),50000));
-        //El valor actual no supera al anteriors
-        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),100));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),100));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),100));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),100));
-
-        //formatos erroneos de las puntuaciones
-        assertEquals(false, tetrisGame.savePuntuation(new Player("Estevan"),-34444444));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Julian"),-5));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Aurelio"),-1));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),1000000));
-        assertEquals(false ,tetrisGame.savePuntuation(new Player("Cristian"),2000000));
-
-
-
-    }
-
 
 }
