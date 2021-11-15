@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuControl {
-  public static int menu(){
+  public static int menu() throws IOException {
     return menuView.menu();
   }
   public static boolean login(Player player,TetrisGameClient tgC) throws FileNotFoundException {

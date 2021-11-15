@@ -21,6 +21,82 @@ public class TetrisGameClientCajaBlancaTests {
     tetrisGame = new TetrisGameClient();
   }
 
+
+
+  @Test
+  void registerUser() throws IOException {
+    File file= new File(tetrisGame.getUSER_FILE());
+    file.delete();
+    //camino 1 if->not isUserNameFormatCorrect()-> return false
+    assertEquals(false, tetrisGame.registerUser("","1eG$5dg@"));
+    assertEquals(false, tetrisGame.registerUser("Charly12","1eG$5dg@"));
+    assertEquals(false, tetrisGame.registerUser("Char Y","1eG$5dg@"));
+    assertEquals(false, tetrisGame.registerUser("Charly.$&&","1eG$5dg@"));
+    //camino 1.2 if->isUserNameFormatCorrect()-> not isPasswordFormatCorrect->return false
+    assertEquals(false, tetrisGame.registerUser("Carlos",""));
+    assertEquals(false, tetrisGame.registerUser("Carlos","aA11@"));
+    assertEquals(false, tetrisGame.registerUser("Carlos","aaaaAAAA@@@111bbbBBBB$$$$"));
+    assertEquals(false, tetrisGame.registerUser("Carlos","123456789"));
+    assertEquals(false, tetrisGame.registerUser("Carlos","abcdefgh"));
+
+    //camino 2 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if isFirstsUser()->writeJson()->return True
+    assertEquals(true, tetrisGame.registerUser("Carlos","1eG$5dg@"));
+
+    //camino 3 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if not isFirstsUser() -> userExist()-> return false
+    assertEquals(false, tetrisGame.registerUser("Carlos","1eG$5dg@"));
+
+    //camino 4 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if not isFirstsUser() -> userNotExist()-> writeJson()-> return true
+    assertEquals(true ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
+
+
+  }
+  @Test
+  void login() throws IOException {
+    File file= new File(tetrisGame.getUSER_FILE());
+    if (file.exists()){
+      file.delete();}
+
+    //camino 1 if->notExistUsersJsonFile-> return false
+    assertEquals(false,tetrisGame.login("Eustaqio","1eG$5dg@"));
+    MockGenerateJsonUsers.generateJsonUsers();
+
+    //camino 2 if->userIncorrect()-> return false
+    assertEquals(false,tetrisGame.login("Carlos","1eG$5dg@"));
+
+    //camino 3 if->userCorrect()->but password incorrect -> return false
+    assertEquals(false,tetrisGame.login("Estevan","2eG$5dg@"));
+
+    //camino if->userCorrect()-> password correct -> return true
+    assertEquals(true,tetrisGame.login("Estevan","1eG$5dgg"));
+
+
+  }
+
+  @Test
+  void savePuntuation() throws IOException {
+    File file= new File(tetrisGame.getUSER_PUNTUATION());
+    if (file.exists()){
+    file.delete();}
+
+    //camino 1 if->isPuntuationFormatIncorrect-> return false
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Eustaqio"),-34444444));
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Estevan"),1000000));
+
+    //camino 2 if->notExistUsersJsonFile->writeJson -> return true
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),50000));
+
+    //camino 3 if->ExistUsersJsonFile->userNotExist ->writeJson-> return true
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Estevan"),50000));
+
+    //camino 4 if->existUsersJsonFile()->userExist -> currentPuntuation<lastPuntuation -> return false
+    assertEquals(false,tetrisGame.savePuntuation(new Player("Carlos"),10000));
+
+    //camino 5 if->userExist()-> currentPuntuation>lastPuntuation -> return true
+    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),60000));
+
+
+  }
+
   // El nombre de usuario solo puede contener hasta 8 letras
   @Test
   void userNameFormatCorrect(){
@@ -90,98 +166,23 @@ public class TetrisGameClientCajaBlancaTests {
 
   }
 
-@Test
-void puntuationFormatCorrect(){
-  //camino 1 if->puntuation<0 -> return false
-  assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-34444444));
-  assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-5));
-  assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-1));
-
-  //camino 2 if->puntuation>0-> if puntuation >999999 -> return false
-  assertEquals(false, tetrisGame.isPuntuationFormatCorrect(1000000));
-  assertEquals(false, tetrisGame.isPuntuationFormatCorrect(2000000));
-
-  //camino 3 if->puntuation>=0-> if puntuation <=999999 -> return true
-  assertEquals(true, tetrisGame.isPuntuationFormatCorrect(0));
-  assertEquals(true, tetrisGame.isPuntuationFormatCorrect(100));
-  assertEquals(true, tetrisGame.isPuntuationFormatCorrect(500000));
-  assertEquals(true, tetrisGame.isPuntuationFormatCorrect(999999));
-
-}
-
   @Test
-  void registerUser() throws IOException {
-    File file= new File(tetrisGame.getUSER_FILE());
-    file.delete();
-    //camino 1 if->not isUserNameFormatCorrect()-> return false
-    assertEquals(false, tetrisGame.registerUser("","1eG$5dg@"));
-    assertEquals(false, tetrisGame.registerUser("Charly12","1eG$5dg@"));
-    assertEquals(false, tetrisGame.registerUser("Char Y","1eG$5dg@"));
-    assertEquals(false, tetrisGame.registerUser("Charly.$&&","1eG$5dg@"));
-    //camino 1.2 if->isUserNameFormatCorrect()-> not isPasswordFormatCorrect->return false
-    assertEquals(false, tetrisGame.registerUser("Carlos",""));
-    assertEquals(false, tetrisGame.registerUser("Carlos","aA11@"));
-    assertEquals(false, tetrisGame.registerUser("Carlos","aaaaAAAA@@@111bbbBBBB$$$$"));
-    assertEquals(false, tetrisGame.registerUser("Carlos","123456789"));
-    assertEquals(false, tetrisGame.registerUser("Carlos","abcdefgh"));
+  void puntuationFormatCorrect(){
+    //camino 1 if->puntuation<0 -> return false
+    assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-34444444));
+    assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-5));
+    assertEquals(false, tetrisGame.isPuntuationFormatCorrect(-1));
 
-    //camino 2 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if isFirstsUser()->writeJson()->return True
-    assertEquals(true, tetrisGame.registerUser("Carlos","1eG$5dg@"));
+    //camino 2 if->puntuation>0-> if puntuation >999999 -> return false
+    assertEquals(false, tetrisGame.isPuntuationFormatCorrect(1000000));
+    assertEquals(false, tetrisGame.isPuntuationFormatCorrect(2000000));
 
-    //camino 3 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if not isFirstsUser() -> userExist()-> return false
-    assertEquals(false, tetrisGame.registerUser("Carlos","1eG$5dg@"));
-
-    //camino 4 if->isUserNameFormatCorrect()->isPasswordFormatCorrect->if not isFirstsUser() -> userNotExist()-> writeJson()-> return true
-    assertEquals(true ,tetrisGame.registerUser("Miguel","4hG$8dg@"));
-
+    //camino 3 if->puntuation>=0-> if puntuation <=999999 -> return true
+    assertEquals(true, tetrisGame.isPuntuationFormatCorrect(0));
+    assertEquals(true, tetrisGame.isPuntuationFormatCorrect(100));
+    assertEquals(true, tetrisGame.isPuntuationFormatCorrect(500000));
+    assertEquals(true, tetrisGame.isPuntuationFormatCorrect(999999));
 
   }
-  @Test
-  void login() throws IOException {
-    File file= new File(tetrisGame.getUSER_FILE());
-    if (file.exists()){
-      file.delete();}
-
-    //camino 1 if->notExistUsersJsonFile-> return false
-    assertEquals(false,tetrisGame.login("Eustaqio","1eG$5dg@"));
-    MockGenerateJsonUsers.generateJsonUsers();
-
-    //camino 1 if->userIncorrect()-> return false
-    assertEquals(false,tetrisGame.login("Carlos","1eG$5dg@"));
-
-    //camino 2 if->userCorrect()->but password incorrect -> return false
-    assertEquals(false,tetrisGame.login("Estevan","2eG$5dg@"));
-
-    //camino 3 if->userCorrect()-> password correct -> return true
-    assertEquals(true,tetrisGame.login("Estevan","1eG$5dgg"));
-
-
-  }
-
-  @Test
-  void savePuntuation() throws IOException {
-    File file= new File(tetrisGame.getUSER_PUNTUATION());
-    if (file.exists()){
-    file.delete();}
-
-    //camino 1 if->isPuntuationFormatIncorrect-> return false
-    assertEquals(false,tetrisGame.savePuntuation(new Player("Eustaqio"),-34444444));
-    assertEquals(false,tetrisGame.savePuntuation(new Player("Estevan"),1000000));
-
-    //camino 2 if->notExistUsersJsonFile->writeJson -> return true
-    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),50000));
-
-    //camino 3 if->notExistUsersJsonFile->userNotExist ->writeJson-> return true
-    assertEquals(true,tetrisGame.savePuntuation(new Player("Estevan"),50000));
-
-    //camino 4 if->existUsersJsonFile()->userExist -> currentPuntuation<lastPuntuation -> return false
-    assertEquals(false,tetrisGame.savePuntuation(new Player("Carlos"),10000));
-
-    //camino 5 if->userExist()-> currentPuntuation>lastPuntuation -> return true
-    assertEquals(true,tetrisGame.savePuntuation(new Player("Carlos"),60000));
-
-
-  }
-
 
 }

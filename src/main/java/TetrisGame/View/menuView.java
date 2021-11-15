@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class menuView {
-  public static int menu(){
+  public static int menu() throws IOException {
+
 
     System.out.println(ConsoleColors.RED_UNDERLINED+ "Tetris Game "+ConsoleColors.RESET);
     System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+ "1. LogIn"+ConsoleColors.RESET);
     System.out.println(ConsoleColors.GREEN_BOLD_BRIGHT+ "2. SignUp"+ConsoleColors.RESET);
     System.out.println(ConsoleColors.PURPLE_BOLD_BRIGHT+ "3. Play"+ConsoleColors.RESET);
     System.out.println(ConsoleColors.YELLOW_BOLD_BRIGHT+ "4. Exit"+ConsoleColors.RESET);
+
+
 
 
     Scanner sc = new Scanner(System.in);
