@@ -6,6 +6,9 @@ import TetrisGame.Controller.Game;
 import TetrisGame.View.Pieces.Piece;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.awt.event.KeyEvent;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -29,6 +32,23 @@ public class GameTests {
         board = Board.getInstance(new MockGenerateRandomNum());
         game = new Game();
         game.enableTesting();
+    }
+
+    @Test
+    public void testToString() {
+        System.out.println(game);
+        game.start();
+        System.out.println(game);
+
+    }
+
+    @Test
+    public void testGetControls() {
+        assertNotNull(game.getControls());
+        game.disableTesting();
+        assertNull(game.getControls());
+
+
     }
 
     @Test

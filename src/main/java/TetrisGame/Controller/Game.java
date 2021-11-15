@@ -37,9 +37,6 @@ public class  Game  implements Observer {
         isRunning = false;
     }
 
-    public Controls getCojtrols() {
-        return controls;
-    }
 
     /*
         public static void clearConsole()
@@ -101,7 +98,7 @@ public class  Game  implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         KeyEvent e = (KeyEvent) arg;
-        if (!isRunning) {
+        if (!isRunning && !testing) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE)
                 start();
             else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {

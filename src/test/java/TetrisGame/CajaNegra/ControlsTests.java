@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -28,7 +28,7 @@ public class ControlsTests {
     game=new Game();
     int[][] initPos = game.getBoard().getPiece().clonePositions();
 
-    game.getCojtrols().pressKeyRight();
+    game.getControls().pressKeyRight();
     assertEquals(false, GameTests.equalPositions(initPos, game.getBoard().getPiece().getPositions()));
     mockControls.pressKeyLeft();
 
