@@ -312,7 +312,6 @@ public class BoardTests {
         board.rotatePieceLeft();
         assertEquals(true, pieceInBoard());
 
-        //TODO: test corners explicitly
 
     }
 

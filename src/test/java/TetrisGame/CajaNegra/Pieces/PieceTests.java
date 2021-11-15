@@ -24,6 +24,7 @@ public class PieceTests {
     public void testGetPieceDim() {
         assertEquals(4, Piece.getPieceDim());
     }
+
     @Test
     public void testMoveCol() {
         int[][] expectedPos = new int[][]{{0, 1}, {1, 1}, {1, 2}, {1, 3}};

@@ -16,13 +16,12 @@ public class BoardCajaBlancaTests {
 
     @BeforeEach
     public void setUp() {
+        if(board != null)
+            board.deleteBoard();
         board = Board.getInstance(new MockGenerateRandomNum());
     }
 
-    @AfterEach
-    public void deleteBoard() {
-        board.deleteBoard();
-    }
+
 
     @Test
     public void testTouchGroundAndPiece() {
@@ -36,7 +35,7 @@ public class BoardCajaBlancaTests {
         board.movePieceNRows(30);
         assertArrayEquals(board.getPiece().getPositions(), expectedPos);
 
-        assertEquals(3, board.getNPieces());
+        assertEquals(4, board.getNPieces());
     }
 
     @Test

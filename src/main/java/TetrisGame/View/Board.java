@@ -13,7 +13,6 @@ public class Board {
     private final List<List<Integer>> matrix;
     private Piece piece;
     //private Timer timer;
-    private static final long timeInterval = 500; //millis
     private int nPieces;
     private int nCompletedRows;
     private boolean ended;
