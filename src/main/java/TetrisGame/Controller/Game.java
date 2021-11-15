@@ -38,28 +38,7 @@ public class  Game  implements Observer {
     }
 
 
-    /*
-        public static void clearConsole()
-        {
-            try
-            {
-                final String os = System.getProperty("os.name");
-                if (os.contains("Windows"))
-                {
-                    Runtime.getRuntime().exec("cls");
-                }
-                else
-                {
-                    Runtime.getRuntime().exec("clear");
-                }
-            }
-            catch (final Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        */
+    //starts or resumes the game
     public void start() {
         if(!isRunning) {
             TimerTask tick = new TimerTask() {
@@ -86,6 +65,7 @@ public class  Game  implements Observer {
         }
     }
 
+    //main game loop of the game
     public void gameLoop() {
         while(!ended && !board.isEnded()) {
             //clearConsole();
@@ -95,6 +75,8 @@ public class  Game  implements Observer {
         gameframe.end();
     }
 
+
+    //when a key is pressed this method is called to process the call
     @Override
     public void update(Observable o, Object arg) {
         KeyEvent e = (KeyEvent) arg;
@@ -131,6 +113,7 @@ public class  Game  implements Observer {
 
 
     }
+    //testing avoids entering the gameLoop
     public void enableTesting() { testing = true; }
     public void disableTesting() { testing = false; }
     public boolean gameEnd() { return ended || board.isEnded(); }

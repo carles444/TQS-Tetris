@@ -19,6 +19,7 @@ public abstract class Piece {
         return auxPos;
     }
 
+    //returns new vector positions and returns it
     public int[][] clonePositions() {
         int[][] auxPos = new int[pieceDim][2];
         for(int i = 0; i < pieceDim; i++) {

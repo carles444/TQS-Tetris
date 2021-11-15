@@ -51,6 +51,7 @@ public class Board {
 
     }
 
+    //singleton
     public static Board getInstance(GenerateRandomNum randObj) {
         if(instance == null)
             instance = new Board(20, 10, randObj);
@@ -88,7 +89,7 @@ public class Board {
         return null;
     }
 
-
+    //checks if the given positions meet the restrictions
     private boolean fitsBoard(int[][] positions) {
         for(int[] pos : positions) {
             if(pos[0] >= getNRows() || pos[1] >= getNCols())
@@ -102,7 +103,7 @@ public class Board {
     }
 
 
-    //tries to move the piece nPositions
+    //move the piece one position if it meets the restrictions
     public boolean movePieceRight() {
         int[][] dest = piece.moveCol(1);
         if(fitsBoard(dest)) {
@@ -214,6 +215,7 @@ public class Board {
         }
     }
 
+    //piece rotation
     public void rotatePieceRight() {
         int[][] dest = piece.rotateRight();
         fixPosition(dest);
@@ -230,6 +232,7 @@ public class Board {
         }
     }
 
+    //deletes the selected row and the upper rows are copied one row down
     private void deleteRow(int row) {
         for(int i = row; i > 1; i--) {
             for(int j = 0; j < getNCols(); j++) {
@@ -241,6 +244,7 @@ public class Board {
         }
     }
 
+    //tries to find full rows to delete them
     public void deleteFullRows() {
         for(int i = 0; i < getNRows(); i++) {
             boolean full = true;
